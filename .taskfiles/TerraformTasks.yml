@@ -9,6 +9,12 @@ tasks:
     cmds:
       - terraform init {{.CLI_ARGS}}
 
+  upgrade:
+    desc: Upgrade terraform
+    dir: "{{.TERRAFORM_DIR}}/cloudflare"
+    cmds:
+      - terraform init --upgrade {{.CLI_ARGS}}
+
   plan:
     desc: Show the changes terraform will make
     dir: "{{.TERRAFORM_DIR}}/cloudflare"

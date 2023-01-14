@@ -65,7 +65,7 @@
         name: "{{ item.name }}"
         namespace: "{{ item.namespace | default('') }}"
         wait: true
-        wait_sleep: 10
+        wait_sleep: 60
         wait_timeout: 360
       loop:
         - kind: Deployment

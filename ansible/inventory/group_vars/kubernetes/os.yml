@@ -32,3 +32,16 @@ ubuntu:
     - socat
     - python3-kubernetes
     - python3-yaml
+
+debian:
+  packages:
+    - hdparm
+    - htop
+    - ipvsadm
+    - lm-sensors
+    - nano
+    - nfs-common
+    - nvme-cli
+    - socat
+    - python3-kubernetes
+    - python3-yaml
