@@ -31,9 +31,11 @@ k3s_server_manifests_urls:
   # Kube-vip
   - url: https://raw.githubusercontent.com/kube-vip/kube-vip/main/docs/manifests/rbac.yaml
     filename: kube-vip-rbac.yaml
-  # Tigera Operator
+#  # Tigera Operator
   - url: https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
     filename: calico-tigera-operator.yaml
+#  - url: https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+#    filename: kube-flannel.yaml
   # Prometheus Operator
   - url: https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.61.1/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
     filename: prometheus-alertmanagerconfigs.yaml
@@ -55,5 +57,6 @@ k3s_server_manifests_urls:
 # (list) A flat list of templates to deploy on the primary control plane
 # /var/lib/rancher/k3s/server/manifests
 k3s_server_manifests_templates:
+#  - kube-flannel.yml.j2
   - calico-installation.yaml.j2
   - kube-vip-daemonset.yaml.j2
