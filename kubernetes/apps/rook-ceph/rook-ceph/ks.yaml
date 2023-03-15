@@ -24,6 +24,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
+  timeout: 10m
   path: "./kubernetes/apps/rook-ceph/rook-ceph/cluster"
   prune: true
   sourceRef:
@@ -42,6 +43,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
+  timeout: 10m
   path: "./kubernetes/apps/rook-ceph/rook-ceph/add-ons"
   prune: true
   sourceRef:
