@@ -5,7 +5,7 @@ metadata:
   name: snapshot-controller
   namespace: kube-system
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: snapshot-controller
@@ -14,19 +14,11 @@ spec:
         kind: HelmRepository
         name: piraeus
         namespace: flux-system
-  maxHistory: 3
+      interval: 30m
   install:
-    createNamespace: true
     crds: CreateReplace
-    remediation:
-      retries: 3
   upgrade:
-    cleanupOnFail: true
     crds: CreateReplace
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
   values:
     replicaCount: 3
     volumeSnapshotClasses:
@@ -41,3 +33,26 @@ spec:
         deletionPolicy: Delete
     serviceMonitor:
       create: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: snapshot-validation-webhook
+  namespace: kube-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: snapshot-validation-webhook
+      version: 1.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: piraeus
+        namespace: flux-system
+      interval: 30m
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip
+  dependsOn:
+    - name: snapshot-controller

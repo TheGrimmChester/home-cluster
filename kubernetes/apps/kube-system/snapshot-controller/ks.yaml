@@ -4,17 +4,23 @@ kind: Kustomization
 metadata:
   name: cluster-apps-snapshot-controller
   namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/kube-system/snapshot-controller/app
+  interval: 10m
+  path: "./kubernetes/apps/kube-system/snapshot-controller/app"
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  wait: true
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: reloader
+      name: snapshot-controller
       namespace: kube-system
-  interval: 30m
-  retryInterval: 1m
-  timeout: 10m
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: snapshot-validation-webhook
+      namespace: kube-system
+  timeout: 2m

@@ -12,7 +12,7 @@ spec:
       version: v1.11.1
       sourceRef:
         kind: HelmRepository
-        name: rook-ceph-charts
+        name: rook-ceph
         namespace: flux-system
   values:
     toolbox:
@@ -34,37 +34,31 @@ spec:
       resources:
         mgr:
           requests:
-            cpu: "500m"
+            cpu: "125m"
             memory: "549M"
           limits:
             memory: "1219M"
         mon:
           requests:
-            cpu: "1"
-            memory: "1Gi"
+            cpu: "49m"
+            memory: "477M"
           limits:
-            memory: "2Gi"
+            memory: "1059M"
         osd:
           requests:
-            cpu: "1"
-            memory: "4Gi"
+            cpu: "442m"
+            memory: "2678M"
           limits:
             memory: "5944M"
-        prepareosd:
-          requests:
-            cpu: "500m"
-            memory: "50Mi"
-          limits:
-            memory: "300Mi"
         mgr-sidecar:
           requests:
-            cpu: "100m"
+            cpu: "49m"
             memory: "94M"
           limits:
             memory: "208M"
         crashcollector:
           requests:
-            cpu: "100m"
+            cpu: "15m"
             memory: "64M"
           limits:
             memory: "64M"
@@ -76,7 +70,7 @@ spec:
             memory: "1G"
         cleanup:
           requests:
-            cpu: "500m"
+            cpu: "250m"
             memory: "100M"
           limits:
             memory: "1G"
@@ -88,24 +82,25 @@ spec:
         enabled: true
         urlPrefix: /
 
+      storage:
+        useAllNodes: true
+        useAllDevices: true
+
     ingress:
       ingressClassName: "nginx"
       dashboard:
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         host:
-          name: &host rook.${SECRET_DOMAIN}
+          name: &host rook-cluster-0.bjw-s.dev
           path: "/"
         tls:
-          - secretName: tls.rook-ceph
-            hosts:
+          - hosts:
               - *host
 
-    storage:
-      useAllNodes: true
-      useAllDevices: true
+    cephBlockPoolsVolumeSnapshotClass:
+      enabled: false
 
     cephBlockPools:
       - name: ceph-blockpool
@@ -191,7 +186,7 @@ spec:
             bucket:
               interval: 60s
         storageClass:
-          enabled: false
+          enabled: true
           name: ceph-bucket
           reclaimPolicy: Delete
           parameters:
