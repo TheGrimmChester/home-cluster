@@ -24,6 +24,7 @@ k3s_server:
     - servicelb
     # Disable traefik - replaced with ingress-nginx and installed with Flux
     - traefik
+    - etcd
   disable-network-policy: true
   disable-cloud-controller: true
   write-kubeconfig-mode: "644"
