@@ -5,14 +5,14 @@ metadata:
   name: rook-ceph-cluster
   namespace: rook-ceph
 spec:
-  interval: 30m
+  interval: 5m
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: v1.11.1
+      version: v1.10.12
       sourceRef:
         kind: HelmRepository
-        name: rook-ceph
+        name: rook-ceph-charts
         namespace: flux-system
   values:
     toolbox:
@@ -28,34 +28,45 @@ spec:
       bdev_async_discard = true
 
     cephClusterSpec:
-      network:
-        provider: host
+      # cephVersion:
+      # image: quay.io/ceph/ceph:v17.2.0
+      # network:
+      #   provider: host
+      #   connections:
+      #     compression:
+      #       enabled: true
 
       resources:
         mgr:
           requests:
             cpu: "125m"
             memory: "549M"
-          limits:
-            memory: "1219M"
+          # limits:
+          #   memory: "1219M"
         mon:
           requests:
             cpu: "49m"
             memory: "477M"
-          limits:
-            memory: "1059M"
+          # limits:
+          #   memory: "1059M"
         osd:
           requests:
             cpu: "442m"
-            memory: "2678M"
-          limits:
-            memory: "5944M"
+            memory: "2000M"
+          # limits:
+          #   memory: "5944M"
+        prepareosd:
+          requests:
+            cpu: "250m"
+            memory: "50Mi"
+          # limits:
+          #   memory: "200Mi"
         mgr-sidecar:
           requests:
             cpu: "49m"
             memory: "94M"
-          limits:
-            memory: "208M"
+          # limits:
+          #   memory: "208M"
         crashcollector:
           requests:
             cpu: "15m"
@@ -66,14 +77,14 @@ spec:
           requests:
             cpu: "100m"
             memory: "100M"
-          limits:
-            memory: "1G"
+          # limits:
+          #   memory: "1G"
         cleanup:
           requests:
             cpu: "250m"
             memory: "100M"
-          limits:
-            memory: "1G"
+          # limits:
+          #   memory: "1G"
 
       crashCollector:
         disable: false
@@ -83,24 +94,26 @@ spec:
         urlPrefix: /
 
       storage:
-        useAllNodes: true
-        useAllDevices: true
-
+        useAllNodes: false
+        useAllDevices: false
+        config:
+          osdsPerDevice: "1"
+        nodes:
+          - name: "test-a"
+            devices:
+              - name: "vdb"
     ingress:
-      ingressClassName: "nginx"
       dashboard:
+        ingressSClassName: nginx-internal
         annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        # traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         host:
           name: &host "rook.${SECRET_DOMAIN}"
           path: "/"
         tls:
-          - hosts:
+          - secretName: tls.rook-ceph
+            hosts:
               - *host
-
-    cephBlockPoolsVolumeSnapshotClass:
-      enabled: false
 
     cephBlockPools:
       - name: ceph-blockpool
@@ -178,7 +191,7 @@ spec:
             resources:
               requests:
                 cpu: 100m
-                memory: 128M
+                memory: 1Gi
               limits:
                 memory: 2Gi
             instances: 1
