@@ -16,4 +16,5 @@ resources:
   - ./weave-gitops.yaml
   - ./cloudnative-pg.yaml
   - ./rook-ceph.yaml
+  - ./kyverno-charts.yaml
   - ./piraeus.yaml
