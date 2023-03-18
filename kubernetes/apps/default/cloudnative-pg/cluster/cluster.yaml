@@ -1,24 +1,27 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres
+  name: postgres-v15
   namespace: default
-  annotations:
-    kyverno.io/ignore: "true"
+#  annotations:
+#    kyverno.io/ignore: "true"
 spec:
-  instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.7
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.2
   primaryUpdateStrategy: unsupervised
+#  storage:
+#    size: 20Gi
+#    storageClass: ceph-block
   storage:
     size: 20Gi
     storageClass: local-path
+
   superuserSecret:
     name: cloudnative-pg-secret
-  bootstrap:
-    recovery:
-      source: &previous-cluster postgres-v2
+#  bootstrap:
+#    recovery:
+#      source: &previous-cluster postgres-v2
   postgresql:
     parameters:
       max_connections: "300"
