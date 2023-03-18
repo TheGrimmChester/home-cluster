@@ -5,6 +5,8 @@ metadata:
   name: cloudnative-pg
   namespace: default
 spec:
+  dependsOn:
+    - name: cluster-apps-rook-ceph
   interval: 30m
   chart:
     spec:
