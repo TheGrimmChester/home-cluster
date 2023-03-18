@@ -5,7 +5,9 @@ metadata:
   name: rook-ceph-cluster
   namespace: rook-ceph
 spec:
-  interval: 5m
+  interval: 30m
+  retryInterval: 1m
+  timeout: 30m
   chart:
     spec:
       chart: rook-ceph-cluster
