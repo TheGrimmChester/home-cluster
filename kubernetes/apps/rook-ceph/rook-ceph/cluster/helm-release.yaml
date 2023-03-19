@@ -115,19 +115,20 @@ spec:
         annotations:
           kubernetes.io/ingress.class: nginx
 
-          cert-manager.io/cluster-issuer: letsencrypt-staging
-          external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
+#          cert-manager.io/cluster-issuer: letsencrypt-staging
+#          external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         host:
           name: &host rook.${SECRET_DOMAIN}
           path: "/"
-#        tls:
-#          - secretName: tls.rook-ceph
-#            hosts:
-#              - *host
         tls:
-          - hosts:
-              - rook.${SECRET_DOMAIN}
+          - secretName: tls.rook-ceph
+            hosts:
+              - *host
+#        tls:
+#          - hosts:
+#              - rook.${SECRET_DOMAIN}
     cephBlockPools:
       - name: ceph-blockpool
         spec:
