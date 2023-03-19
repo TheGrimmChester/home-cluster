@@ -121,11 +121,13 @@ spec:
         host:
           name: &host rook.${SECRET_DOMAIN}
           path: "/"
+#        tls:
+#          - secretName: tls.rook-ceph
+#            hosts:
+#              - *host
         tls:
-          - secretName: tls.rook-ceph
-            hosts:
-              - *host
-
+          - hosts:
+              - rook.${SECRET_DOMAIN}
     cephBlockPools:
       - name: ceph-blockpool
         spec:
