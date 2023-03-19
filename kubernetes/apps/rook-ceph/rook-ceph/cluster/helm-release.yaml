@@ -119,7 +119,7 @@ spec:
       dashboard:
         ingressClassName: nginx
         host:
-          name: &host rook.${SECRET_DOMAIN}
+          name: &host rook-ceph.${SECRET_DOMAIN}
           path: /
         tls:
           - hosts:
