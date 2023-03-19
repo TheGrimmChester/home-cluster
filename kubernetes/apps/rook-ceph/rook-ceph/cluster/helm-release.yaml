@@ -113,6 +113,8 @@ spec:
       ingressClassName: "nginx"
       dashboard:
         annotations:
+          kubernetes.io/ingress.class: nginx
+
           cert-manager.io/cluster-issuer: letsencrypt-staging
           external-dns.alpha.kubernetes.io/target: ipv4.${SECRET_DOMAIN}
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
