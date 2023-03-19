@@ -94,6 +94,7 @@ spec:
 
       dashboard:
         enabled: true
+        ssl: true
         urlPrefix: /
 
       storage:
