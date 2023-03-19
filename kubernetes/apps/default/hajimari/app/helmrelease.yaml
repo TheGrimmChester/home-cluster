@@ -43,6 +43,7 @@ spec:
           - flux-system
           - monitoring
           - networking
+          - rook-ceph
     ingress:
       main:
         enabled: true

@@ -110,7 +110,7 @@ spec:
         urlPrefix: /
 
     ingress:
-      ingressClassName: nginx
+#      ingressClassName: nginx
       dashboard:
         ingressClassName: nginx
         annotations:
