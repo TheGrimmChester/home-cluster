@@ -51,8 +51,8 @@ spec:
           requests:
             cpu: "49m"
             memory: "477M"
-#            count: 1
-#            allowMultiplePerNode: true
+            count: 1
+            allowMultiplePerNode: "true"
           # limits:
           #   memory: "1059M"
         osd:
