@@ -29,6 +29,9 @@ spec:
       bdev_async_discard = true
 
     cephClusterSpec:
+      mon:
+        count: 1
+        allowMultiplePerNode: true
       # cephVersion:
       # image: quay.io/ceph/ceph:v17.2.0
       # network:
