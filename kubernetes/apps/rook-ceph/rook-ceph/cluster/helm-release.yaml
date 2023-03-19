@@ -127,7 +127,7 @@ spec:
           name: &host rook.${SECRET_DOMAIN}
           path: "/"
         tls:
-#          - secretName: tls.rook-ceph
+          - secretName: tls.rook-ceph
             hosts:
               - *host
 
