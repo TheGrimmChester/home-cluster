@@ -39,58 +39,58 @@ spec:
       #   connections:
       #     compression:
       #       enabled: true
-#
-#      resources:
-#        mgr:
-#          requests:
-#            cpu: "125m"
-#            memory: "549M"
-#          # limits:
-#          #   memory: "1219M"
-#        mon:
-#          requests:
-#            cpu: "49m"
-#            memory: "477M"
-##            count: 1
-##            allowMultiplePerNode: 1
-#          # limits:
-#          #   memory: "1059M"
-#        osd:
-#          requests:
-#            cpu: "442m"
-#            memory: "2000M"
-#          # limits:
-#          #   memory: "5944M"
-#        prepareosd:
-#          requests:
-#            cpu: "250m"
-#            memory: "50Mi"
-#          # limits:
-#          #   memory: "200Mi"
-#        mgr-sidecar:
-#          requests:
-#            cpu: "49m"
-#            memory: "94M"
-#          # limits:
-#          #   memory: "208M"
-#        crashcollector:
-#          requests:
-#            cpu: "15m"
-#            memory: "64M"
-#          limits:
-#            memory: "64M"
-#        logcollector:
-#          requests:
-#            cpu: "100m"
-#            memory: "100M"
-#          # limits:
-#          #   memory: "1G"
-#        cleanup:
-#          requests:
-#            cpu: "250m"
-#            memory: "100M"
-#          # limits:
-#          #   memory: "1G"
+
+      resources:
+        mgr:
+          requests:
+            cpu: "125m"
+            memory: "549M"
+          # limits:
+          #   memory: "1219M"
+        mon:
+          requests:
+            cpu: "49m"
+            memory: "477M"
+#            count: 1
+#            allowMultiplePerNode: 1
+          # limits:
+          #   memory: "1059M"
+        osd:
+          requests:
+            cpu: "442m"
+            memory: "2000M"
+          # limits:
+          #   memory: "5944M"
+        prepareosd:
+          requests:
+            cpu: "250m"
+            memory: "50Mi"
+          # limits:
+          #   memory: "200Mi"
+        mgr-sidecar:
+          requests:
+            cpu: "49m"
+            memory: "94M"
+          # limits:
+          #   memory: "208M"
+        crashcollector:
+          requests:
+            cpu: "15m"
+            memory: "64M"
+          limits:
+            memory: "64M"
+        logcollector:
+          requests:
+            cpu: "100m"
+            memory: "100M"
+          # limits:
+          #   memory: "1G"
+        cleanup:
+          requests:
+            cpu: "250m"
+            memory: "100M"
+          # limits:
+          #   memory: "1G"
 
       crashCollector:
         disable: false
@@ -105,9 +105,12 @@ spec:
             devices:
               - name: "vdb"
 #
-#      dashboard:
-#        enabled: true
+      dashboard:
+        enabled: true
 #        urlPrefix: /
+          urlPrefix: /ceph-dashboard
+          port: 8443
+
       network:
         provider: host
       dashboard:
@@ -119,13 +122,21 @@ spec:
       dashboard:
         ingressClassName: nginx
         host:
-          name: &host rook-ceph.${SECRET_DOMAIN}
+          name: &host "rook-ceph.${SECRET_DOMAIN}"
           path: /
         tls:
           - hosts:
               - *host
             secretName: rook-tls
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: "rook-ceph.${SECRET_DOMAIN}"
+          kubernetes.io/ingress.class: nginx
+          nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          nginx.ingress.kubernetes.io/server-snippet: |
+            proxy_ssl_verify off;
 
+#
 #
 #    ingress:
 ##      ingressClassName: nginx
