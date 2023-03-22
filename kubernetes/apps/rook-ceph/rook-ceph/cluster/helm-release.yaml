@@ -20,8 +20,15 @@ spec:
       enabled: false
 
     monitoring:
-      enabled: true
-      createPrometheusRules: true
+      enabled: false
+      createPrometheusRules: false
+    livenessProbe:
+      mon:
+        disabled: true
+      mgr:
+        disabled: true
+      osd:
+        disabled: true
 
     configOverride: |
       [global]
