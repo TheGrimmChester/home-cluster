@@ -118,6 +118,8 @@ spec:
 
 #      network:
 #        provider: host
+      network:
+        hostNetwork: true
     ingress:
       dashboard:
         ingressClassName: nginx
