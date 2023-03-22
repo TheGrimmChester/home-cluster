@@ -104,20 +104,20 @@ spec:
           - name: "test-a"
             devices:
               - name: "vdb"
-#
-      dashboard:
-        enabled: true
-#        urlPrefix: /
-          urlPrefix: /ceph-dashboard
-          port: 8443
 
-      network:
-        provider: host
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: false
+        ssl: true
+#
+#      dashboard:
+#        enabled: true
+#        urlPrefix: /
+#          urlPrefix: /ceph-dashboard
+#          port: 8443
 
+#      network:
+#        provider: host
     ingress:
       dashboard:
         ingressClassName: nginx
