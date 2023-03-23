@@ -108,7 +108,10 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "test-a"
+          - name: "vm-1"
+            devices:
+              - name: "vdb"
+          - name: "vm-2"
             devices:
               - name: "vdb"
 
@@ -139,7 +142,7 @@ spec:
             secretName: rook-tls
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "rook-ceph.${SECRET_DOMAIN}"
-          kubernetes.io/ingress.class: nginx
+#          kubernetes.io/ingress.class: nginx
           nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           nginx.ingress.kubernetes.io/server-snippet: |
