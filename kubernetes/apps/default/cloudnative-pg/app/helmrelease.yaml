@@ -16,3 +16,16 @@ spec:
         kind: HelmRepository
         name: cloudnative-pg
         namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+#  values:
+#    crds:
+#      create: true
+#    config:
+#      data:
+#        INHERITED_ANNOTATIONS: kyverno.io/ignore
