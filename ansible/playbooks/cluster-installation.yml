@@ -56,6 +56,7 @@
         path: "{{ repo_abs_path.stdout }}/kubeconfig"
         regexp: "https://127.0.0.1:6443"
         replace: "https://{{ k3s_registration_address }}:6443"
+        #replace: "https://192.168.1.4:6443"
 
     - name: Resource Readiness Check
       run_once: true
