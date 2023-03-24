@@ -21,12 +21,12 @@ spec:
   instances: 1
 
   imageName: ghcr.io/cloudnative-pg/postgresql:15.1
-  bootstrap:
-    initdb:
-      database: app
-      owner: app
-      secret:
-        name: cluster-example-app-user
+#  bootstrap:
+#    initdb:
+#      database: app
+#      owner: app
+#      secret:
+#        name: cluster-example-app-user
 
   postgresql:
     parameters:
