@@ -24,6 +24,22 @@ spec:
   monitoring:
     enablePodMonitor: false
 
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      wal:
+        compression: gzip
+      destinationPath: s3://postgresql/v15/v1
+      endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
+      s3Credentials:
+        accessKeyId:
+          name: cloudnative-pg-secret
+          key: aws-access-key-id
+        secretAccessKey:
+          name: cloudnative-pg-secret
+          key: aws-secret-access-key
+  externalClusters: []
 #---
 #apiVersion: postgresql.cnpg.io/v1
 #kind: Cluster
