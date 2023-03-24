@@ -1,4 +1,14 @@
 ---
+apiVersion: v1
+data:
+  password: VHhWZVE0bk44MlNTaVlIb3N3cU9VUlp2UURhTDRLcE5FbHNDRUVlOWJ3RHhNZDczS2NrSWVYelM1Y1U2TGlDMg==
+  username: YXBw
+kind: Secret
+metadata:
+  name: cluster-example-app-user
+type: kubernetes.io/basic-auth
+
+---
 # yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -11,6 +21,12 @@ spec:
   instances: 1
 
   imageName: ghcr.io/cloudnative-pg/postgresql:15.1
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: cluster-example-app-user
 
   postgresql:
     parameters:
@@ -18,7 +34,7 @@ spec:
     pg_hba:
       # To access through TCP/IP you will need to get username
       # and password from the secret cluster-example-custom-app
-      - host all all all md5
+      - host all all all scram-sha-256
 #    pg_hba:
   #      - host all all 10.244.0.0/16 md5
   primaryUpdateStrategy: unsupervised
