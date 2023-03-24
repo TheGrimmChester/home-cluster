@@ -24,7 +24,6 @@ spec:
   monitoring:
     enablePodMonitor: false
 
-
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
