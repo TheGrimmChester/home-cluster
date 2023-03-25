@@ -6,6 +6,7 @@ namespace: default
 resources:
   - cluster.yaml
   - service.yaml
+  - scheduledbackup.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: cloudnative-pg-cluster
