@@ -54,6 +54,12 @@ spec:
     barmanObjectStore:
       wal:
         compression: gzip
+        encryption: AES256
+      data:
+        compression: gzip
+        encryption: AES256
+        immediateCheckpoint: false
+        jobs: 2
       destinationPath: s3://postgresql/v15/v1
       endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
       s3Credentials:
