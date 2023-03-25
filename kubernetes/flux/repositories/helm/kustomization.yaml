@@ -19,3 +19,4 @@ resources:
   - ./kyverno-charts.yaml
   - ./piraeus.yaml
   - ./lwolf-charts.yaml
+  - ./backube.yaml
