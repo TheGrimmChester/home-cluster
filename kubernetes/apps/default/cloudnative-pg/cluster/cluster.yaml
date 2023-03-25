@@ -27,9 +27,9 @@ spec:
 #      secret:
 #        name: cluster-example-app-user
 #
-  bootstrap:
-    recovery:
-      source: clusterBackup
+#  bootstrap:
+#    recovery:
+#      source: clusterBackup
 
   postgresql:
     parameters:
@@ -66,19 +66,19 @@ spec:
         secretAccessKey:
           name: cloudnative-pg-secret
           key: aws-secret-access-key
-#  externalClusters: []
-  externalClusters:
-    - name: clusterBackup
-      barmanObjectStore:
-        wal:
-          compression: bzip2
-          maxParallel: 8
-        destinationPath: s3://postgresql/v15/v1
-        endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
-        s3Credentials:
-          accessKeyId:
-            name: cloudnative-pg-secret
-            key: aws-access-key-id
-          secretAccessKey:
-            name: cloudnative-pg-secret
-            key: aws-secret-access-key
+  externalClusters: []
+#  externalClusters:
+#    - name: clusterBackup
+#      barmanObjectStore:
+#        wal:
+#          compression: bzip2
+#          maxParallel: 8
+#        destinationPath: s3://postgresql/v15/v1
+#        endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
+#        s3Credentials:
+#          accessKeyId:
+#            name: cloudnative-pg-secret
+#            key: aws-access-key-id
+#          secretAccessKey:
+#            name: cloudnative-pg-secret
+#            key: aws-secret-access-key
