@@ -8,3 +8,4 @@ resources:
   - cloudnative-pg/ks.yaml
   - kubernetes-schemas/ks.yaml
   - tautulli/ks.yaml
+  - redis/ks.yaml
