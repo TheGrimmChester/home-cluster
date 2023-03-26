@@ -21,3 +21,4 @@ resources:
   - ./lwolf-charts.yaml
   - ./backube.yaml
   - ./intel.yaml
+  - ./prometheus-community.yaml
