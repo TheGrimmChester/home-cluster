@@ -124,7 +124,8 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
-        ssl: true
+        ssl: false
+        port: 8443
 #
 #      dashboard:
 #        enabled: true
