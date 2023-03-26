@@ -20,3 +20,5 @@ resources:
   - ./piraeus.yaml
   - ./lwolf-charts.yaml
   - ./backube.yaml
+  - ./node-feature-discovery.yaml
+  - ./intel.yaml
