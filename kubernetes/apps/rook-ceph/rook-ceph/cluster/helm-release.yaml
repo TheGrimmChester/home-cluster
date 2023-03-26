@@ -113,7 +113,13 @@ spec:
               - name: "vdb"
           - name: "vm-2"
             devices:
-              - name: "vdb"
+              - name: "vda"
+          - name: "vm-3"
+            devices:
+              - name: "/dev/mapper/ubuntu--vg-rook--ceph"
+          - name: "vm-4"
+            devices:
+              - name: "/dev/mapper/ubuntu--vg-rook--ceph"
 
       dashboard:
         enabled: true
