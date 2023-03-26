@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  thanos.yaml: dHlwZTogUzMKY29uZmlnOgogIGVuZHBvaW50OiAibmFzLm5pY29sYXNtZWxvbmkub3ZoOjkwMDkiCiAgYnVja2V0OiAidGhhbm9zIgogIGFjY2Vzc19rZXk6ICI1OTcxMzM3NDM2NzczOTdBIgogIHNlY3JldF9rZXk6ICIy
+  thanos.yaml: dHlwZTogUzMKY29uZmlnOgogIGVuZHBvaW50OiAiaHR0cHM6Ly9uYXMubmljb2xhc21lbG9uaS5vdmg6OTAwOSIKICBidWNrZXQ6ICJ0aGFub3MiCiAgYWNjZXNzX2tleTogIjU5NzEzMzc0MzY3NzM5N0EiCiAgc2VjcmV0
 kind: Secret
 metadata:
   name: thanos-objstore-config
