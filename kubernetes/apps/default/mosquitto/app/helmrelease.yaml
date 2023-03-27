@@ -1,17 +1,3 @@
-apiVersion: v1
-data:
-  pwfile: WG9yaXg6bW9qbzkxMQ==
-kind: Secret
-metadata:
-  labels:
-    app.kubernetes.io/instance: mosquitto
-    app.kubernetes.io/name: mosquitto
-    kustomize.toolkit.fluxcd.io/name: cluster-apps-mosquitto
-    kustomize.toolkit.fluxcd.io/namespace: flux-system
-  name: mosquitto-secret
-  namespace: default
-type: Opaque
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -40,27 +26,13 @@ spec:
       repository: public.ecr.aws/docker/library/eclipse-mosquitto
       tag: 2.0.15
 
-    initContainers:
-      copy-config:
-        image: public.ecr.aws/docker/library/eclipse-mosquitto:2.0.15@sha256:c043073ba24de67a1728a4e0755ebd8ef68ae9dd60d0d9886b15c955df5558b0
-        command:
-          - "/bin/sh"
-          - -c
-        args:
-          - cp /data/mosquitto_secret/* /data/external_config/ && mosquitto_passwd -U /data/external_config/mosquitto_pwd
-        volumeMounts:
-          - name: mosquitto-secret
-            mountPath: /data/mosquitto_secret
-          - name: external-config
-            mountPath: /data/external_config
-
     service:
       main:
-#        type: LoadBalancer
-#        loadBalancerIP: "192.168.1.203"
-#        annotations:
-#          coredns.io/hostname: "mqtt.${SECRET_DOMAIN}"
-#        externalTrafficPolicy: Local
+        type: LoadBalancer
+        loadBalancerIP: "192.168.1.203"
+        annotations:
+          coredns.io/hostname: "mqtt.${SECRET_DOMAIN}"
+        externalTrafficPolicy: Local
         ports:
           http:
             enabled: false
@@ -72,18 +44,16 @@ spec:
       mosquitto-config:
         enabled: true
         type: configMap
-        name: mosquitto-configmap
+        name: mosquitto-config
         mountPath: /mosquitto/config/mosquitto.conf
         subPath: mosquitto.conf
       mosquitto-secret:
         enabled: true
-        type: secret
-        name: mosquitto-secret
-        mountPath: "-"
-      external-config:
-        enabled: true
-        type: emptyDir
-        mountPath: /mosquitto/external_config
+        type: configMap
+        name: mosquitto-password
+        mountPath: /mosquitto/config/password.txt
+        subPath: password.txt
+        readOnly: true
 
     resources:
       requests:
