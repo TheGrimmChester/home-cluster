@@ -9,5 +9,5 @@ resources:
   - kubernetes-schemas/ks.yaml
   - tautulli/ks.yaml
   - redis/ks.yaml
-  - mosquitto/ks.yaml
-  - kube-prometheus-stack/ks.yaml
+#  - mosquitto/ks.yaml
+#  - kube-prometheus-stack/ks.yaml
