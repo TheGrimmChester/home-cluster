@@ -48,3 +48,15 @@ spec:
       enabled: true
       serviceMonitor:
         enabled: true
+    cluster:
+      init: true
+      nodes: 1
+      replicas: 1
+      externalAccess:
+        enabled: true
+        service:
+          type: LoadBalancer
+          port: 6379
+          loadBalancerIP: []
+          loadBalancerSourceRanges: []
+          annotations: {}
