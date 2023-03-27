@@ -20,7 +20,7 @@ metadata:
 spec:
   sourcePVC: data-mosquitto-0
   trigger:
-    schedule: "0 */12 * * *"
+    schedule: "*/15 * * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14

@@ -21,7 +21,7 @@ metadata:
 spec:
   sourcePVC: data-tautulli-0
   trigger:
-    schedule: "0 */12 * * *"
+    schedule: "*/15 * * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
