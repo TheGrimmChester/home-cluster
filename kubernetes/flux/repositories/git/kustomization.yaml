@@ -5,4 +5,3 @@ resources:
   - ./local-path-provisioner.yaml
   - ./cloudnative-pg.yaml
   - ./snapshot-controller.yaml
-  - ./node-feature-discovery.yaml

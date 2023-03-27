@@ -22,3 +22,4 @@ resources:
   - ./backube.yaml
   - ./intel.yaml
   - ./prometheus-community.yaml
+  - ./node-feature-discovery.yaml
