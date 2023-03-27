@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: tautulli-secret
+  name: tautulli-restic-secret
   namespace: default
 type: Opaque
 stringData:
@@ -25,7 +25,7 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: tautullli-secret
+    repository: tautulli-restic-secret
     retain:
       daily: 14
 
