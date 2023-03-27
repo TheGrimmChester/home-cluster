@@ -10,4 +10,5 @@ resources:
   - tautulli/ks.yaml
   - redis/ks.yaml
   - mosquitto/ks.yaml
+  - home-assistant/ks.yaml
 #  - kube-prometheus-stack/ks.yaml

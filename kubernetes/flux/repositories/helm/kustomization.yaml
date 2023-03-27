@@ -23,3 +23,4 @@ resources:
   - ./intel.yaml
   - ./prometheus-community.yaml
   - ./node-feature-discovery.yaml
+  - ./k8s-at-home-charts.yaml
