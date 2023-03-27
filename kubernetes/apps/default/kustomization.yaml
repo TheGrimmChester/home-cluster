@@ -6,7 +6,7 @@ resources:
   - echo-server/ks.yaml
   - hajimari/ks.yaml
   - cloudnative-pg/ks.yaml
-  - kubernetes-schemas/ks.yaml
+#  - kubernetes-schemas/ks.yaml
   - tautulli/ks.yaml
   - redis/ks.yaml
 #  - mosquitto/ks.yaml
