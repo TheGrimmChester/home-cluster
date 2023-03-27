@@ -108,16 +108,16 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "vm-1"
-            devices:
-              - name: "vdb"
-          - name: "vm-2"
-            devices:
-              - name: "vda"
           - name: "vm-3"
             devices:
+              - name: "vdb"
+#          - name: "vm-2"
+#            devices:
+#              - name: "vda"
+          - name: "vm-1"
+            devices:
               - name: "/dev/mapper/ubuntu--vg-rook--ceph"
-          - name: "vm-4"
+          - name: "vm-2"
             devices:
               - name: "/dev/mapper/ubuntu--vg-rook--ceph"
 
@@ -125,7 +125,7 @@ spec:
         enabled: true
         urlPrefix: /
         ssl: false
-        port: 8443
+#        port: 8443
 #
 #      dashboard:
 #        enabled: true
