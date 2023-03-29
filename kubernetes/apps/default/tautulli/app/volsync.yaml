@@ -19,13 +19,16 @@ metadata:
   name: tautulli
   namespace: default
 spec:
-  sourcePVC: data-tautulli-0
+  sourcePVC: config-tautulli-0
   trigger:
     schedule: "*/15 * * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
     repository: tautulli-restic-secret
+    cacheCapacity: 2Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
     retain:
       daily: 14
 
