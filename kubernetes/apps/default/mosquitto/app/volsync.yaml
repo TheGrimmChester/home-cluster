@@ -25,5 +25,8 @@ spec:
     copyMethod: Snapshot
     pruneIntervalDays: 14
     repository: mosquitto-restic-secret
+    cacheCapacity: 2Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
     retain:
       daily: 14
