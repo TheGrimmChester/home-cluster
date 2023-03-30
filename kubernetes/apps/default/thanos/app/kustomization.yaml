@@ -6,7 +6,7 @@ namespace: default
 resources:
   - ./secret.yaml
   - ./helmrelease.yaml
-  - ./dashboard/
+  - ./dashboards/
 
 labels:
   - pairs:

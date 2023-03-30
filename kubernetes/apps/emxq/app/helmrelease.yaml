@@ -25,14 +25,14 @@ spec:
   values:
     image:
       repository: public.ecr.aws/emqx/emqx
-    replicaCount: 3
+    replicaCount: 1
     recreatePods: true
     emqxConfig:
       EMQX_ALLOW_ANONYMOUS: 'false'
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
-      ADMIN_PASSWORD: admin
-      USER_1_USERNAME: test
-      USER_1_PASSWORD: test
+      EMQX_AUTH__ADMIN__PASSWORD: admin
+      EMQX_AUTH__USER__1__USERNAME: test
+      EMQX_AUTH__USER__1__PASSWORD: test
     service:
       type: LoadBalancer
       loadBalancerIP: '192.168.1.205'
