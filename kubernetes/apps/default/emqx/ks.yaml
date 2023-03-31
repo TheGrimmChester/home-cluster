@@ -20,6 +20,6 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: emqx
-      namespace: home-automation
+      namespace: default
   dependsOn:
     - name: cluster-apps-rook-ceph-cluster
