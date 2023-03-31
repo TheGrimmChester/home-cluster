@@ -6,19 +6,21 @@ metadata:
   namespace: default
 type: Opaque
 stringData:
-  MQTT_PASSWORD: "{{ .MQTT_PASSWORD }}"
-  ENCRYPTION_KEY: "{{ .TESLAMATE_ENCRYPTION_KEY }}"
+#  MQTT_HOST: "{{ .MQTT_PASSWORD }}"
+#  MQTT_PASSWORD: "{{ .MQTT_PASSWORD }}"
+#  MQTT_USERNAME: "{{ .MQTT_PASSWORD }}"
+  ENCRYPTION_KEY: "teslamate"
   DATABASE_NAME: teslamate
   DATABASE_HOST: postgres-rw.default.svc.cluster.local
-  DATABASE_PASS: "{{ .TESLAMATE_POSTGRES_PASS }}"
-  DATABASE_USER: "{{ .TESLAMATE_POSTGRES_USER }}"
+  DATABASE_PASS: "teslamate"
+  DATABASE_USER: "teslamate"
 
   # Postgres Init
   POSTGRES_DB: teslamate
   POSTGRES_HOST: postgres-rw.default.svc.cluster.local
-  POSTGRES_SUPER_PASS: "{{ .POSTGRES_SUPER_PASS }}"
-  POSTGRES_PASS: "{{ .TESLAMATE_POSTGRES_PASS }}"
-  POSTGRES_USER: "{{ .TESLAMATE_POSTGRES_USER }}"
+  POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
+  POSTGRES_PASS: "teslamate"
+  POSTGRES_USER: "teslamate"
 
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -77,7 +79,7 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx"
-          cert-manager.io/cluster-issuer: letsencrypt-staging
+#          cert-manager.io/cluster-issuer: letsencrypt-staging
           nginx.ingress.kubernetes.io/whitelist-source-range: |
             10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
           hajimari.io/icon: mdi:car
