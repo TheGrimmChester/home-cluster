@@ -26,5 +26,3 @@ spec:
       kind: HelmRelease
       name: emqx
       namespace: default
-  dependsOn:
-    - name: cluster-apps-rook-ceph-cluster
