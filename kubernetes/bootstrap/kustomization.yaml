@@ -14,3 +14,19 @@ patches:
       group: networking.k8s.io
       version: v1
       kind: NetworkPolicy
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-ingress-egress
+  namespace: flux-system
+spec:
+  podSelector: {}
+  ingress:
+  - {}
+  egress:
+  - {}
+  policyTypes:
+  - Ingress
+  - Egress
