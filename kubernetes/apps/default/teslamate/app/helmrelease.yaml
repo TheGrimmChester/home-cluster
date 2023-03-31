@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: home-assistant-restic-secret
+  name: teslamate-secret
   namespace: default
 type: Opaque
 stringData:
@@ -78,7 +78,7 @@ spec:
       main:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: "nginx"
+#          kubernetes.io/ingress.class: "nginx"
 #          cert-manager.io/cluster-issuer: letsencrypt-staging
           nginx.ingress.kubernetes.io/whitelist-source-range: |
             10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
