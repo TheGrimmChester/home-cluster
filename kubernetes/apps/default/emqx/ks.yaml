@@ -8,6 +8,11 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: 'true'
 spec:
+  dependsOn:
+    - name: cluster-apps-k8s-gateway
+    - name: cluster-apps-ingress-nginx
+    - name: cluster-apps-rook-ceph-cluster
+    - name: cluster-apps-volsync
   path: './kubernetes/apps/default/emqx/app/'
   prune: true
   sourceRef:
