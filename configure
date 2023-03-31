@@ -426,6 +426,7 @@ generate_ansible_hosts() {
             if [[ "${!node_control}" == "true" ]]; then
                 master_node_count=$((master_node_count+1))
                 node_hostname="BOOTSTRAP_ANSIBLE_HOSTNAME_${node_id}"
+                node_rook_block_device="BOOTSTRAP_ANSIBLE_ROOK_BLOCK_DEVICE_${node_id}"
                 host_key="${!node_hostname:-${default_control_node_prefix}}"
                 if [ "${host_key}" == "${default_control_node_prefix}" ]; then
                     node_hostname=${default_control_node_prefix}${node_id}
@@ -434,6 +435,7 @@ generate_ansible_hosts() {
                 fi
                 printf "        %s:\n" "${node_hostname}"
                 printf "          ansible_host: %s\n" "${!var}"
+                printf "          rook_block_device: %s\n" "${!node_rook_block_device}"
             else
                 worker_node_count=$((worker_node_count+1))
             fi
@@ -446,6 +448,7 @@ generate_ansible_hosts() {
                 node_control="BOOTSTRAP_ANSIBLE_CONTROL_NODE_${node_id}"
                 if [[ "${!node_control}" == "false" ]]; then
                     node_hostname="BOOTSTRAP_ANSIBLE_HOSTNAME_${node_id}"
+                    node_rook_block_device="BOOTSTRAP_ANSIBLE_ROOK_BLOCK_DEVICE_${node_id}"
                     host_key="${!node_hostname:-${default_worker_node_prefix}}"
                     if [ "${host_key}" == "${default_worker_node_prefix}" ]; then
                         node_hostname=${default_worker_node_prefix}${node_id}
@@ -454,6 +457,7 @@ generate_ansible_hosts() {
                     fi
                     printf "        %s:\n" "${node_hostname}"
                     printf "          ansible_host: %s\n" "${!var}"
+                    printf "          rook_block_device: %s\n" "${!node_rook_block_device}"
                 fi
             done
         fi
