@@ -33,8 +33,8 @@ spec:
       runAsGroup: 568
       fsGroup: 568
     retain:
-      hourly: 1
-      daily: 1
-      weekly: 1
-      monthly: 1
-      yearly: 1
+      hourly: 10
+      daily: 10
+      weekly: 10
+      monthly: 10
+      yearly: 10
