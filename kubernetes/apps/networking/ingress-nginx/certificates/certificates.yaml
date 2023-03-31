@@ -13,16 +13,31 @@
 #  dnsNames:
 #    - "${SECRET_DOMAIN}"
 #    - "*.${SECRET_DOMAIN}"
+#---
+#apiVersion: cert-manager.io/v1
+#kind: Certificate
+#metadata:
+#  name: "${SECRET_DOMAIN/./-}-staging"
+#  namespace: networking
+#spec:
+#  secretName: "${SECRET_DOMAIN/./-}-staging-tls"
+#  issuerRef:
+#    name: letsencrypt-staging
+#    kind: ClusterIssuer
+#  commonName: "${SECRET_DOMAIN}"
+#  dnsNames:
+#    - "${SECRET_DOMAIN}"
+#    - "*.${SECRET_DOMAIN}"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN/./-}-staging"
+  name: "${SECRET_DOMAIN/./-}-dev"
   namespace: networking
 spec:
-  secretName: "${SECRET_DOMAIN/./-}-staging-tls"
+  secretName: "${SECRET_DOMAIN/./-}-dev-tls"
   issuerRef:
-    name: letsencrypt-staging
+    name: self-signed-issuer
     kind: ClusterIssuer
   commonName: "${SECRET_DOMAIN}"
   dnsNames:
