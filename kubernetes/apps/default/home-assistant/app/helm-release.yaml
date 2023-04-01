@@ -23,9 +23,21 @@ spec:
   values:
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2022.9.5
+      #tag: 2022.9.5
+    initContainers:
+      init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.7
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: home-assistant-secret
+
     env:
       TZ: "Europe/Paris"
+    envFrom:
+      - secretRef:
+          name: home-assistant-secret
+
 #    envFrom:
 #      - secretRef:
 #          name: home-assistant

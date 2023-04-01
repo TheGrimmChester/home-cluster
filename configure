@@ -60,6 +60,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/teslamate-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/home-assistant-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/default/home-assistant/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/home-assistant/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/external-dns-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/networking/external-dns/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/networking/external-dns/app/secret.sops.yaml"
