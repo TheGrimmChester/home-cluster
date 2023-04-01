@@ -9,7 +9,7 @@ resources:
 #  - kubernetes-schemas/ks.yaml
   - tautulli/ks.yaml
   - redis/ks.yaml
-  - mosquitto/ks.yaml
+#  - mosquitto/ks.yaml
   - home-assistant/ks.yaml
   - thanos/ks.yaml
   - emqx/ks.yaml
