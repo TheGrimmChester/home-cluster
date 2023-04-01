@@ -12,5 +12,5 @@ resources:
   - home-assistant/ks.yaml
 #  - thanos/ks.yaml
   - emqx/ks.yaml
-  - teslamate/ks.yaml
+#  - teslamate/ks.yaml
 #  - kube-prometheus-stack/ks.yaml
