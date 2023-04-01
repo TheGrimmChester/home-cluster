@@ -39,8 +39,6 @@ spec:
     env:
       TZ: "Europe/Paris"
       DISABLE_MQTT: "false"
-      MQTT_HOST: "emqx"
-      MQTT_USERNAME: "mqtt"
     envFrom:
       - secretRef:
           name: teslamate-secret
