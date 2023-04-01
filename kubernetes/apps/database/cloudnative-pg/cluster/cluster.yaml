@@ -73,12 +73,12 @@ spec:
         destinationPath: s3://postgresql/v15/v1
         endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
       s3Credentials:
-        accessKeyId:
-          name: cloudnative-pg-secret
-          key: aws-access-key-id
-        secretAccessKey:
-          name: cloudnative-pg-secret
-          key: aws-secret-access-key
+#        accessKeyId:
+#          name: cloudnative-pg-secret
+#          key: aws-access-key-id
+#        secretAccessKey:
+#          name: cloudnative-pg-secret
+#          key: aws-secret-access-key
 
 #  externalClusters: []
 #  externalClusters:
