@@ -17,7 +17,7 @@ metadata:
   annotations:
     kyverno.io/ignore: 'true'
 spec:
-  instances: 3
+  instances: 2
 #
   imageName: ghcr.io/cloudnative-pg/postgresql:15.1
 #  bootstrap:
@@ -72,13 +72,13 @@ spec:
       barmanObjectStore:
         destinationPath: s3://postgresql/v15/v1
         endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
-      s3Credentials:
-#        accessKeyId:
-#          name: cloudnative-pg-secret
-#          key: aws-access-key-id
-#        secretAccessKey:
-#          name: cloudnative-pg-secret
-#          key: aws-secret-access-key
+        s3Credentials:
+          accessKeyId:
+            name: cloudnative-pg-secret
+            key: aws-access-key-id
+          secretAccessKey:
+            name: cloudnative-pg-secret
+            key: aws-secret-access-key
 
 #  externalClusters: []
 #  externalClusters:
