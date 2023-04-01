@@ -1,28 +1,4 @@
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: teslamate-secret
-  namespace: default
-type: Opaque
-stringData:
-#  MQTT_HOST: "{{ .MQTT_PASSWORD }}"
-#  MQTT_PASSWORD: "{{ .MQTT_PASSWORD }}"
-#  MQTT_USERNAME: "{{ .MQTT_PASSWORD }}"
-  ENCRYPTION_KEY: "teslamate"
-  DATABASE_NAME: teslamate
-  DATABASE_HOST: postgres-rw.default.svc.cluster.local
-  DATABASE_PASS: "teslamate"
-  DATABASE_USER: "teslamate"
-
-  # Postgres Init
-  POSTGRES_DB: teslamate
-  POSTGRES_HOST: postgres-rw.default.svc.cluster.local
-  POSTGRES_SUPER_PASS: "${POSTGRES_SUPER_PASS}"
-  POSTGRES_PASS: "teslamate"
-  POSTGRES_USER: "teslamate"
-
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
