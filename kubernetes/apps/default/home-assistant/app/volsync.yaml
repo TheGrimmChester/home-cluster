@@ -20,12 +20,12 @@ metadata:
 spec:
   sourcePVC: home-assistant-config-0
   trigger:
-    schedule: "0 6 * * *"
+    schedule: "0 0 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
     repository: home-assistant-restic-secret
-    cacheCapacity: 20Gi
+    cacheCapacity: 2Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
     moverSecurityContext:
@@ -33,8 +33,5 @@ spec:
       runAsGroup: 568
       fsGroup: 568
     retain:
-      hourly: 10
       daily: 10
-      weekly: 10
-      monthly: 10
-      yearly: 10
+      within: 3d
