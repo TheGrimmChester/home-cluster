@@ -27,9 +27,9 @@ spec:
 #      secret:
 #        name: cluster-example-app-user
 #
-#  bootstrap:
-#    recovery:
-#      source: clusterBackup
+  bootstrap:
+    recovery:
+      source: cluster-backup
 
   postgresql:
     parameters:
