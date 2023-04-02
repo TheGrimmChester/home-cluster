@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: cluster-apps-rook-ceph-cluster
     - name: cluster-apps-volsync
+    - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-ingress-nginx
   path: ./kubernetes/apps/default/teslamate/app
   prune: true
   sourceRef:
