@@ -55,8 +55,8 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/networking/cloudflare-ddns/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/networking/cloudflare-ddns/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/cloudnative-pg-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/apps/default/cloudnative-pg/app/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/cloudnative-pg/app/secret.sops.yaml"
+            > "${PROJECT_DIR}/kubernetes/apps/database/cloudnative-pg/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/database/cloudnative-pg/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/teslamate-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
