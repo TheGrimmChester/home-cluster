@@ -29,7 +29,7 @@ spec:
 #
 #  bootstrap:
 #    recovery:
-#      source: postgres
+#      source: postgres-v2
 
   postgresql:
     parameters:
@@ -53,13 +53,14 @@ spec:
     enablePodMonitor: false
 
   backup:
-    retentionPolicy: 7d
+    retentionPolicy: 30d
     barmanObjectStore:
       wal:
-        compression: gzip
+        compression: bzip2
+        maxParallel: 8
       destinationPath: s3://postgresql/v15/v1
       endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
-#      serverName: "recoveredCluster"
+      serverName: "postgres-v3"
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
@@ -68,8 +69,11 @@ spec:
           name: cloudnative-pg-secret
           key: aws-secret-access-key
   externalClusters:
-    - name: postgres
+    - name: postgres-v2
       barmanObjectStore:
+        wal:
+          compression: bzip2
+          maxParallel: 8
         destinationPath: s3://postgresql/v15/v1
         endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
         s3Credentials:
