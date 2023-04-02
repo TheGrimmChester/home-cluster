@@ -6,6 +6,7 @@ namespace: default
 resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
+  - ./pvc.yaml
 patchesStrategicMerge:
   - ./patches/env.yaml
 configMapGenerator:
