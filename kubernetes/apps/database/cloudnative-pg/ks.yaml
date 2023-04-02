@@ -8,7 +8,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-k8s-gateway
-    - name: cluster-apps-ingress-nginx
   path: ./kubernetes/apps/database/cloudnative-pg/app
   prune: true
   sourceRef:
