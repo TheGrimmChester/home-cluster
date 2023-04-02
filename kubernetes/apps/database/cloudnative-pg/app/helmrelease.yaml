@@ -7,7 +7,7 @@ metadata:
 spec:
 #  dependsOn:
 #    - name: cluster-apps-rook-ceph-cluster
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: cloudnative-pg
@@ -21,6 +21,7 @@ spec:
     remediation:
       retries: 5
   upgrade:
+    cleanupOnFail: true
     remediation:
       retries: 5
 #  values:
@@ -29,3 +30,11 @@ spec:
 #    config:
 #      data:
 #        INHERITED_ANNOTATIONS: kyverno.io/ignore
+  uninstall:
+    keepHistory: false
+  values:
+    crds:
+      create: true
+    config:
+      data:
+        INHERITED_ANNOTATIONS: kyverno.io/ignore
