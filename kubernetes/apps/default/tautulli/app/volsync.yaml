@@ -8,10 +8,10 @@ metadata:
 spec:
   sourcePVC: config-tautulli-0
   trigger:
-    schedule: "0 6 * * *"
+    schedule: "0 0 * * *"
   restic:
     copyMethod: Snapshot
-    pruneIntervalDays: 14
+    pruneIntervalDays: 10
     repository: tautulli-restic-secret
     cacheCapacity: 2Gi
     volumeSnapshotClassName: csi-ceph-blockpool
@@ -21,11 +21,8 @@ spec:
       runAsGroup: 568
       fsGroup: 568
     retain:
-      hourly: 10
       daily: 10
-      weekly: 10
-      monthly: 10
-      yearly: 10
+      within: 3d
 
 #spec:
 #  sourcePVC: config-tautulli-0
