@@ -59,7 +59,7 @@ spec:
         compression: gzip
       destinationPath: s3://postgresql/v15/v1
       endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
-      serverName: "recoveredCluster"
+#      serverName: "recoveredCluster"
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
