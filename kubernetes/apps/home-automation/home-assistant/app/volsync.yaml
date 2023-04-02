@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: home-assistant-restic-secret
-  namespace: default
+  namespace: home-automation
 type: Opaque
 stringData:
   RESTIC_REPOSITORY: "${S3_RESTIC_URL}/home-assistant"
@@ -16,7 +16,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: home-assistant
-  namespace: default
+  namespace: home-automation
 spec:
   sourcePVC: home-assistant-config-0
   trigger:
