@@ -113,6 +113,13 @@ spec:
         subPath: configuration.yml
         mountPath: /config/configuration.yml
         readOnly: false
+      notification:
+        enabled: true
+        type: configMap
+        name: authelia-configmap
+        subPath: notification.txt
+        mountPath: /config/notification.txt
+        readOnly: false
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
