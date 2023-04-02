@@ -41,14 +41,14 @@ spec:
 #    envFrom:
 #      - secretRef:
 #          name: home-assistant
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+#    hostNetwork: true
+#    dnsPolicy: ClusterFirstWithHostNet
     service:
       main:
-        type: ClusterIP
         ports:
           http:
             port: 8123
+
 
     ingress:
       main:
@@ -77,12 +77,25 @@ spec:
         enabled: false
       startup:
         enabled: false
-    persistence:
-      config:
-        enabled: true
-        storageClass: ceph-block
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+
+#    persistence:
+#      config:
+#        enabled: true
+#        storageClass: ceph-block
+#        accessMode: ReadWriteOnce
+#        size: "5Gi"
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
         accessMode: ReadWriteOnce
-        size: "10Gi"
+        size: 5Gi
+        storageClass: ceph-block
+
 #      config:
 #        enabled: true
 #        type: emptyDir
