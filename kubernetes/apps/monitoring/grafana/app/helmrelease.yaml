@@ -17,6 +17,14 @@ spec:
       interval: 5m
   install:
     createNamespace: true
+    remediation:
+      retries: 10
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 10
+  uninstall:
+    keepHistory: false
   values:
     replicas: 1
     env:
