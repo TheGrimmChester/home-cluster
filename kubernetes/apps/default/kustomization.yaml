@@ -15,4 +15,5 @@ resources:
   - emqx/ks.yaml
   - cyberchef/ks.yaml
 #  - teslamate/ks.yaml
+  - teslamate_grafana/ks.yaml
 #  - kube-prometheus-stack/ks.yaml
