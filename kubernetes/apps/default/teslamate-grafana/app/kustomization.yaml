@@ -9,5 +9,5 @@ resources:
 #  - ./volsync.yaml
 labels:
   - pairs:
-      app.kubernetes.io/name: teslamate_grafana
-      app.kubernetes.io/instance: teslamate_grafana
+      app.kubernetes.io/name: teslamate-grafana
+      app.kubernetes.io/instance: teslamate-grafana

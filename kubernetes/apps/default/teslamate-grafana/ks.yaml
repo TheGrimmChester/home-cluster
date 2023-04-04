@@ -11,7 +11,9 @@ spec:
     - name: cluster-apps-volsync
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-ingress-nginx
-  path: ./kubernetes/apps/default/teslamate_grafana/app
+#    - name: cluster-apps-teslamate
+
+  path: ./kubernetes/apps/default/teslamate-grafana/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,7 +21,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: teslamate_grafana
+      name: teslamate-grafana
       namespace: default
   interval: 30m
   retryInterval: 1m
