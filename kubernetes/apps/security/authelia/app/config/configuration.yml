@@ -22,11 +22,12 @@ access_control:
   default_policy: one_factor
   rules:
     # Rules applied to everyone
+    - domain: "auth.${SECRET_DOMAIN}"
+      policy: bypass
+
     - domain: ['teslamate-grafana.${SECRET_DOMAIN}']
       policy: bypass
 
-    - domain: auth.${SECRET_DOMAIN}
-      policy: bypass
 #    - domain: "*.${SECRET_DOMAIN}"
 #      policy: one_factor
 #    - domain: "${SECRET_DOMAIN}"
