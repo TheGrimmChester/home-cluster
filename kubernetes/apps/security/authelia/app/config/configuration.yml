@@ -19,15 +19,18 @@ access_control:
     - '10.0.0.0/8'
     - '172.16.0.0/12'
     - '192.168.0.0/18'
-  default_policy: deny
+  default_policy: one_factor
   rules:
     # Rules applied to everyone
+    - domain: ['teslamate-grafana.${SECRET_DOMAIN}']
+      policy: bypass
+
     - domain: auth.${SECRET_DOMAIN}
       policy: bypass
-    - domain: "*.${SECRET_DOMAIN}"
-      policy: one_factor
-    - domain: "${SECRET_DOMAIN}"
-      policy: one_factor
+#    - domain: "*.${SECRET_DOMAIN}"
+#      policy: one_factor
+#    - domain: "${SECRET_DOMAIN}"
+#      policy: one_factor
 
 notifier:
   disable_startup_check: true
