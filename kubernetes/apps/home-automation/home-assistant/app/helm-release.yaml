@@ -60,9 +60,9 @@ spec:
         ingressClassName: "nginx"
         annotations:
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          external-dns/is-public: "true"
-          nginx.ingress.kubernetes.io/whitelist-source-range: |
-            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+#          external-dns/is-public: "true"
+#          nginx.ingress.kubernetes.io/whitelist-source-range: |
+#            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
           hajimari.io/enable: "true"
           hajimari.io/group: "home"
           hajimari.io/icon: "home-assistant"
@@ -104,8 +104,8 @@ spec:
 #        enabled: true
 #        type: emptyDir
 #        existingClaim: home-assistant-config-v1
-#    podAnnotations:
-#      secret.reloader.stakater.com/reload: "home-assistant"
+    podAnnotations:
+      secret.reloader.stakater.com/reload: "home-assistant"
     resources:
       requests:
         cpu: 10m
