@@ -12,15 +12,19 @@ session:
         - host: redis-node-2.redis-headless.default.svc.cluster.local
           port: 26379
 
-access_control:
-  default_policy: two_factor
+  default_policy: one_factor
   networks:
-    - name: internal
-      networks: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  - name: internal
+    networks:
+    - '10.0.0.0/8'
+    - '172.16.0.0/12'
+    - '192.168.0.0/18'
+
 #  rules:
 #    - domain: ["grafana.${SECRET_DOMAIN}"]
 #      policy: bypass
 #
+
 #identity_providers:
 #  oidc:
 #    cors:
@@ -37,6 +41,7 @@ access_control:
 #        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
 #        userinfo_signing_algorithm: none
 notifier:
-  disable_startup_check: false
+  disable_startup_check: true
   filesystem:
     filename: /data/notification.txt
+
