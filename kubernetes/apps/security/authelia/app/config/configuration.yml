@@ -24,6 +24,9 @@ access_control:
     # Rules applied to everyone
     - domain: "auth.${SECRET_DOMAIN}"
       policy: bypass
+    # Rules applied to everyone
+    - domain: "authelia.security.svc.cluster.local"
+      policy: bypass
 
     - domain: ['teslamate-grafana.${SECRET_DOMAIN}']
       policy: bypass
