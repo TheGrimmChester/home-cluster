@@ -11,17 +11,24 @@ session:
           port: 26379
         - host: redis-node-2.redis-headless.default.svc.cluster.local
           port: 26379
+
 access_control:
-  default_policy: deny
   networks:
   - name: internal
     networks:
     - '10.0.0.0/8'
     - '172.16.0.0/12'
     - '192.168.0.0/18'
+  default_policy: deny
   rules:
-    - domain: ["grafana-teslamate.${SECRET_DOMAIN}"]
-      policy: two_factor
+    # Rules applied to everyone
+    - domain: auth.${SECRET_DOMAIN}
+      policy: bypass
+    - domain: "*.${SECRET_DOMAIN}"
+      policy: one_factor
+    - domain: "${SECRET_DOMAIN}"
+      policy: one_factor
+
 notifier:
   disable_startup_check: true
   filesystem:
