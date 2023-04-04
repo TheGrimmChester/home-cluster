@@ -8,8 +8,6 @@ resources:
 #  - kubernetes-schemas/ks.yaml
   - tautulli/ks.yaml
   - redis/ks.yaml
-  - glauth/ks.yaml
-  - authelia/ks.yaml
 #  - mosquitto/ks.yaml
 #  - thanos/ks.yaml
   - emqx/ks.yaml
