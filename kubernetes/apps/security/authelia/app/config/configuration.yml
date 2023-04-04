@@ -11,7 +11,8 @@ session:
           port: 26379
         - host: redis-node-2.redis-headless.default.svc.cluster.local
           port: 26379
-  default_policy: two_factor
+access_control:
+  default_policy: deny
   networks:
   - name: internal
     networks:
