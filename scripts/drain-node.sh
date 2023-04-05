@@ -22,4 +22,4 @@ do
 done
 
 # Drain node to be removed
-kubectl drain $NODENAME
+kubectl drain $NODENAME --ignore-daemonsets --delete-emptydir-data
