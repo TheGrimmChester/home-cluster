@@ -7,7 +7,6 @@ resources:
   - hajimari/ks.yaml
 #  - kubernetes-schemas/ks.yaml
   - tautulli/ks.yaml
-  - redis/ks.yaml
 #  - mosquitto/ks.yaml
 #  - thanos/ks.yaml
   - emqx/ks.yaml
