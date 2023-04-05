@@ -40,7 +40,7 @@ spec:
                       name: cloudnative-pg-secret
                       key: password
                 - name: POSTGRES_DB
-                  value: "home_assistant,teslamate"
+                  value: "home_assistant,teslamate,authelia"
               volumeMounts:
                 - name: nas-backups
                   mountPath: /backups
