@@ -5,6 +5,10 @@ metadata:
   name: echo-server
   namespace: default
 spec:
+  nodeSelector:
+    kubernetes.io/os: linux
+    kubernetes.io/arch: arm64
+
   interval: 15m
   chart:
     spec:
