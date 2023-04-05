@@ -17,6 +17,11 @@ spec:
       interval: 5m
   install:
     createNamespace: true
+  upgrade:
+    remediation: # perform remediation when helm upgrade fails
+      retries: 50
+      remediateLastFailure: true # remediate the last failure, when no retries remain
+    cleanupOnFail: true
 #  dependsOn:
 #    - name: cluster-apps-mosquitto
 #      namespace: home-automation
@@ -47,12 +52,12 @@ spec:
 #          name: home-assistant
 #    hostNetwork: true
 #    dnsPolicy: ClusterFirstWithHostNet
+
     service:
       main:
         ports:
           http:
             port: 8123
-
 
     ingress:
       main:
@@ -86,7 +91,13 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       fsGroupChangePolicy: OnRootMismatch
-
+    persistence:
+      ha-config:
+        enabled: true
+        type: configMap
+        name: ha-config
+        mountPath: /config/configuration.yaml
+        subPath: configuration.yaml
 #    persistence:
 #      config:
 #        enabled: true
