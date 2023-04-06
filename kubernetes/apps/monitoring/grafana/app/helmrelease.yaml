@@ -34,7 +34,7 @@ spec:
         envFrom:
           - secretRef:
               name: grafana-secret
-    replicas: 3
+    replicas: 1
     rbac:
       pspEnabled: false
     testFramework:
