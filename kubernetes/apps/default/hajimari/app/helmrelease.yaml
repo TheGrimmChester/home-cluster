@@ -28,14 +28,14 @@ spec:
   values:
     hajimari:
       title: Apps
-      darkTheme: espresso
+      darkTheme: blackboard
       alwaysTargetBlank: true
-      showGreeting: true
+      showGreeting: false
       showAppGroups: true
       showAppStatus: true
       showBookmarkGroups: true
       showGlobalBookmarks: true
-      showAppUrls: true
+      showAppUrls: false
       defaultEnable: true
       namespaceSelector:
         matchNames:

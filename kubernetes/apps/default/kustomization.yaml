@@ -13,4 +13,5 @@ resources:
   - cyberchef/ks.yaml
 #  - teslamate/ks.yaml
   - teslamate-grafana/ks.yaml
+  - theme-park/ks.yaml
 #  - kube-prometheus-stack/ks.yaml
