@@ -25,6 +25,8 @@ access_control:
     - domain: "auth.${SECRET_DOMAIN}"
       policy: bypass
     # Rules applied to everyone
+    - domain: ['grafana.${SECRET_DOMAIN}']
+      policy: bypass
     - domain: "authelia.security.svc.cluster.local"
       policy: bypass
     - domain: ['teslamate-grafana.${SECRET_DOMAIN}']
@@ -50,7 +52,7 @@ identity_providers:
         description: Grafana
         secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
         public: false
-        authorization_policy: two_factor
+        authorization_policy: one_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
         redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
