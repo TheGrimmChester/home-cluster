@@ -13,12 +13,12 @@ session:
           port: 26379
 
 access_control:
-#  networks:
-#  - name: internal
-#    networks:
-#    - '10.0.0.0/8'
-#    - '172.16.0.0/12'
-#    - '192.168.0.0/18'
+  networks:
+  - name: internal
+    networks:
+    - '10.0.0.0/8'
+    - '172.16.0.0/12'
+    - '192.168.0.0/18'
   default_policy: deny
   rules:
     # Rules applied to everyone
@@ -40,18 +40,18 @@ notifier:
   filesystem:
     filename: /data/notification.txt
 
-#identity_providers:
-#  oidc:
-#    cors:
-#      endpoints: ["authorization", "token", "revocation", "introspection"]
-#      allowed_origins_from_client_redirect_uris: true
-#    clients:
-#      - id: grafana
-#        description: Grafana
-#        secret: "SDINFIZDSBN>DIQSNSDINFIZDSBN>DIQSNSDINFIZDSBN>DIQSN"
-#        public: false
-#        authorization_policy: two_factor
-#        pre_configured_consent_duration: 1y
-#        scopes: ["openid", "profile", "groups", "email"]
-#        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
-#        userinfo_signing_algorithm: none
+identity_providers:
+  oidc:
+    cors:
+      endpoints: ["authorization", "token", "revocation", "introspection"]
+      allowed_origins_from_client_redirect_uris: true
+    clients:
+      - id: grafana
+        description: Grafana
+        secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
+        public: false
+        authorization_policy: two_factor
+        pre_configured_consent_duration: 1y
+        scopes: ["openid", "profile", "groups", "email"]
+        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
+        userinfo_signing_algorithm: none

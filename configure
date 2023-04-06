@@ -66,6 +66,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/authelia-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/security/authelia/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/security/authelia/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/grafana-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/monitoring/grafana/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/monitoring/grafana/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/home-assistant-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/home-automation/home-assistant/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/home-automation/home-assistant/app/secret.sops.yaml"
