@@ -6,3 +6,4 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./kube-cleanup-operator/ks.yaml
   - ./grafana/ks.yaml
+  - ./echo-server/ks.yaml

@@ -3,11 +3,21 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: echo-server
-  namespace: default
+  namespace: monitoring
 spec:
   nodeSelector:
     kubernetes.io/os: linux
-    kubernetes.io/arch: arm64
+    kubernetes.io/arch: amd64
+    node-role.kubernetes.io/worker: "true"
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values: ["vm-1"]
+          topologyKey: kubernetes.io/hostname
 
   interval: 15m
   chart:
