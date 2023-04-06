@@ -81,15 +81,15 @@ spec:
     nodeSelector:
       node-role.kubernetes.io/worker: "true"
       intel.feature.node.kubernetes.io/gpu: "true"
-#    affinity:
-#      podAntiAffinity:
-#        requiredDuringSchedulingIgnoredDuringExecution:
-#          - labelSelector:
-#              matchExpressions:
-#                - key: app.kubernetes.io/name
-#                  operator: In
-#                  values: ["vm-2"]
-#            topologyKey: kubernetes.io/hostname
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values: ["vm-1"]
+            topologyKey: kubernetes.io/hostname
     resources:
       requests:
         gpu.intel.com/i915: 1
