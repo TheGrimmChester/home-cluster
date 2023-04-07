@@ -15,6 +15,18 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  containers:
+  - name: acm
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /dev/ttyACM0
+      name: ttyacm
+  volumes:
+  - name: ttyacm
+    hostPath:
+      path: /dev/ttyACM0
+
   maxHistory: 3
   install:
     createNamespace: true
