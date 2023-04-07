@@ -60,6 +60,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/teslamate-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/plex-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/media/plex/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/plex/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/glauth-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/security/glauth/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/security/glauth/app/secret.sops.yaml"

@@ -3,10 +3,10 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: tautulli
+  name: plex
   namespace: default
 spec:
-  sourcePVC: config-tautulli-0
+  sourcePVC: config-plex-0
   trigger:
     schedule: "0 0 * * *"
   restic:
