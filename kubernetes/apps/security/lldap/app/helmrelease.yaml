@@ -1,0 +1,96 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lldap
+  namespace: security
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 30
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 30
+  uninstall:
+    keepHistory: false
+  values:
+#    initContainers:
+#      01-init-db:
+#        image: ghcr.io/onedr0p/postgres-initdb:14.7
+#        imagePullPolicy: IfNotPresent
+#        envFrom:
+#          - secretRef:
+#              name: lldap-secret
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: ghcr.io/lldap/lldap
+      # TODO: Switch to release tag on next release
+      tag: latest-alpine
+    env:
+      TZ: Europe/Paris
+      LLDAP_HTTP_PORT: &http-port 17170
+      LLDAP_LDAP_PORT: &ldap-port 389
+      LLDAP_LDAP_BASE_DN: cn=admins,ou=people,dc=home,dc=arpa
+      RUST_BACKTRACE: full
+      LLDAP_HTTP_URL: "https://lldap.${CLOUDED_DOMAIN}"
+    envFrom:
+      - secretRef:
+          name: lldap-secret
+    service:
+      main:
+        ports:
+          http:
+            port: *http-port
+          ldap:
+            enabled: true
+            port: *ldap-port
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: |
+            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        hosts:
+          - host: &host "lldap.${CLOUDED_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      data:
+        enabled: true
+        type: emptyDir
+#    topologySpreadConstraints:
+#      - maxSkew: 1
+#        topologyKey: kubernetes.io/hostname
+#        whenUnsatisfiable: DoNotSchedule
+#        labelSelector:
+#          matchLabels:
+#            app.kubernetes.io/name: *app
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        memory: 500Mi

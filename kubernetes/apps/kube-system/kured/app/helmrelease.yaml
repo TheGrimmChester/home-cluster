@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kured
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://kubereboot.github.io/charts
+      chart: kured
+      version: 4.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: kubereboot-charts
+        namespace: flux-system
+      interval: 10m
+  install:
+    timeout: 10m
+    replace: true
+    crds: CreateReplace
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+      strategy: rollback
+    cleanupOnFail: true
+    crds: CreateReplace
+  test:
+    enable: true
+  rollback:
+    recreate: true
+    force: true
+    cleanupOnFail: true
+  uninstall:
+    keepHistory: false
+  maxHistory: 3
+  values:
+    configuration:
+      startTime: "0:00"
+      endTime: "4:00"
+      timeZone: "Europe/Paris"
+      rebootCommand: "/usr/bin/systemctl reboot"
+      blockingPodSelector:
+        app.kubernetes.io/created-by: "volsync"
+    tolerations:
+      - key: "arm"
+        operator: "Exists"
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+    metrics:
+      create: true
+    service:
+      create: true

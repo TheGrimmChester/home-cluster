@@ -1,0 +1,181 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app jdownloader
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: jdownloader2
+      version: 10.0.15
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 30
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 30
+  uninstall:
+    keepHistory: false
+
+  values:
+#    controller:
+#      replicas: 1
+#      type: statefulset
+#      annotations:
+#        reloader.stakater.com/auto: "true"
+
+#    image:
+#      repository: jlesage/jdownloader-2
+#      tag: latest
+#      imagePullPolicy: IfNotPresent
+    image:
+      repository: tccr.io/truecharts/jdownloader-2
+      pullPolicy: IfNotPresent
+      tag: 23.03.1@sha256:7dd1eaf32f1530b351c8fc0eee3439010dc2af4e791b660408e7d0d56ec66e4b
+
+    env:
+#      TZ: Europe/Paris
+      MYJDOWNLOADER_DEVICE_NAME: "Kube"
+      # General Settings
+      KEEP_APP_RUNNING: false
+      # GUI Settings
+      DISPLAY_WIDTH: 1280
+      DISPLAY_HEIGHT: 768
+      SECURE_CONNECTION: false
+      ENABLE_CJK_FONT: false
+      CONTAINER_DEBUG: true
+    envFrom:
+      - secretRef:
+          name: jdownloader-secret
+
+#    resources:
+#      requests:
+#        cpu: 15m
+#        memory: 64M
+#      limits:
+#        memory: 500M
+
+    service:
+      main:
+        ports:
+          main:
+            port: 10054
+            targetPort: 5800
+    myjd:
+      enabled: true
+      ports:
+        myjd:
+          enabled: true
+          port: 3129
+          targetPort: 3129
+    vnc:
+      enabled: true
+      ports:
+        vnc:
+          enabled: true
+          port: 10056
+          targetPort: 5900
+
+#    probes:
+#      liveness: &probes
+#        enabled: true
+#        custom: true
+#        spec:
+#          httpGet:
+#            path: /
+#            port: 5800
+#          initialDelaySeconds: 0
+#          periodSeconds: 10
+#          timeoutSeconds: 1
+#          failureThreshold: 3
+#      readiness: *probes
+#      startup:
+#        enabled: false
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+#          nginx.ingress.kubernetes.io/whitelist-source-range: |
+#            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.security.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${CLOUDED_DOMAIN}?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: |
+            proxy_set_header X-Forwarded-Method $request_method;
+
+          hajimari.io/icon: mdi:download-box
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "JD2"
+        hosts:
+          - host: &host "jd2.${CLOUDED_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    securityContext:
+      readOnlyRootFilesystem: false
+      runAsNonRoot: false
+
+    podSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
+        size: 1Gi
+        storageClass: ceph-block
+        accessMode: ReadWriteOnce
+      output:
+        enabled: true
+        type: hostPath
+        hostPath: "/mnt/Entertainments/Downloads"
+        mountPath: "/output"
+#      output:
+#        enabled: true
+#        mountPath: /output
+#        type: nfs
+#        server: "192.168.1.101"
+#        path: /mnt/Entertainments/Downloads
+#        readOnly: false
+
+    nodeSelector:
+#      node-role.kubernetes.io/worker: "true"
+      intel.feature.node.kubernetes.io/gpu: "true"
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values: [ "truenas2012" ]
+            topologyKey: kubernetes.io/hostname
+
+    resources:
+      requests:
+        gpu.intel.com/i915: 1
+        cpu: 100m
+        memory: 1000Mi
+      limits:
+        gpu.intel.com/i915: 1
+        memory: 4000Mi

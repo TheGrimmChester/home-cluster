@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: authelia-configmap
+  namespace: security
+  labels:
+    app: authelia
+data:
+  configuration.yml: |
+    session:
+      redis:
+        high_availability:
+          sentinel_name: redis-master
+          nodes:
+            - host: redis-node-0.redis-headless.database.svc.cluster.local
+              port: 26379
+            - host: redis-node-1.redis-headless.database.svc.cluster.local
+              port: 26379
+            - host: redis-node-2.redis-headless.database.svc.cluster.local
+              port: 26379
+
+    access_control:
+      networks:
+        - name: internal
+          networks:
+            - '10.0.0.0/8'
+            - '172.16.0.0/12'
+            - '192.168.0.0/18'
+      default_policy: deny
+      rules:
+        # Disable Authelia for local network
+        - domain: ["*.${CLOUDED_DOMAIN}"]
+          policy: bypass
+          networks:
+            - internal
+
+          # Disable Authelia for apps that don't support it
+        - policy: bypass
+          domain:
+            - "hass.${CLOUDED_DOMAIN}"
+            - "vault.${CLOUDED_DOMAIN}"
+            - "auth.${CLOUDED_DOMAIN}"
+            - "grafana.${CLOUDED_DOMAIN}"
+            - "authelia.security.svc.cluster.local"
+
+          # No public access
+        - policy: deny
+          domain:
+            - "*.${CLOUDED_DOMAIN}"
+          resources:
+            - "^/admin.*$"
+
+          # Applications with built-in auth
+
+          # Applications without auth
+        - policy: one_factor
+          domain:
+            - "teslamate-grafana.${CLOUDED_DOMAIN}"
+            - "teslamate.${CLOUDED_DOMAIN}"
+
+          # Applications without auth but low security requirements
+        - policy: one_factor
+          domain:
+            - "apps.${CLOUDED_DOMAIN}"
+            - "jd2.${CLOUDED_DOMAIN}"
+            - "sickchill.${CLOUDED_DOMAIN}"
+
+    notifier:
+      disable_startup_check: true
+      filesystem:
+        filename: /data/notification.txt
+
+    identity_providers:
+      oidc:
+        #cors:
+        #  endpoints: ["authorization", "token", "revocation", "introspection"]
+        #  allowed_origins_from_client_redirect_uris: true
+        clients:
+          - id: grafana
+            description: Grafana
+            secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
+            public: false
+            authorization_policy: one_factor
+            pre_configured_consent_duration: 1y
+            scopes: ["openid", "profile", "groups", "email"]
+            redirect_uris: ["https://grafana.${CLOUDED_DOMAIN}/login/generic_oauth"]
+            userinfo_signing_algorithm: none

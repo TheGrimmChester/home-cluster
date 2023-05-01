@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app cyberchef
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.4.0
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+    image:
+      repository: docker.io/mpepping/cyberchef
+      tag: v10.4.0
+    env:
+      TZ: ${TIMEZONE}
+    resources:
+      requests:
+        cpu: 15m
+        memory: 79M
+      limits:
+        memory: 79M
+    service:
+      main:
+        ports:
+          http:
+            port: 8000
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: hammer-wrench
+        hosts:
+          - host: &host "{{ .Release.Name }}.${CLOUDED_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *host
