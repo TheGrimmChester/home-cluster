@@ -19,11 +19,11 @@ spec:
   install:
     createNamespace: true
     remediation:
-      retries: 3
+      retries: 30
   upgrade:
     cleanupOnFail: true
     remediation:
-      retries: 3
+      retries: 30
   uninstall:
     keepHistory: false
   values:
@@ -101,6 +101,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
+          - name: "teslamate"
+            orgId: 1
+            folder: "TeslaMate"
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/teslamate
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -128,7 +136,64 @@ spec:
             url: http://kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
+          - name: TeslaMate
+            type: postgres
+            url: "postgres-v15-rw.database.svc.cluster.local"
+            user: "${SECRET_USERNAME}"
+            secureJsonData:
+              password: "${SECRET_PASSWORD}"
+            jsonData:
+              sslmode: "disable"
+              database: "teslamate"
+              postgresVersion: '15'
+
     dashboards:
+      teslamate:
+        carloscuezva-teslamate-battery-health:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/battery-health.json
+          datasource: TeslaMate
+          folder:
+        carloscuezva-teslamate-charges:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/charges.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-charging-costs-stats:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/charging-costs-stats.json
+          datasource: TeslaMate
+          folder:
+        carloscuezva-teslamate-charging-curves:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/charging-curves.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-charging-tops:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/charging-tops.json
+          datasource: TeslaMate
+          folder:
+        carloscuezva-teslamate-current-charge-view:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/current-charge-view.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-drive-tops:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/drive-tops.json
+          datasource: TeslaMate
+          folder:
+        carloscuezva-teslamate-drives:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/drives.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-locations:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/locations.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-overview:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/overview.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-states:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/states.json
+          datasource: TeslaMate
+        carloscuezva-teslamate-tire-pressure:
+          url: https://raw.githubusercontent.com/CarlosCuezva/dashboards-Grafana-Teslamate/main/dashboards/tire-pressure.json
+          datasource: TeslaMate
+
+        jheredianet-teslamate-continuous-trip:
+          url: https://raw.githubusercontent.com/jheredianet/Teslamate-CustomGrafanaDashboards/main/dashboards/ContinuousTrips.json
+          datasource: TeslaMate
+
       default:
         # Ref: https://grafana.com/grafana/dashboards/11312-unifi-poller-usw-insights-prometheus/
         unifi-usw:
