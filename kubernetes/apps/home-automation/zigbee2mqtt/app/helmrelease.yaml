@@ -37,15 +37,6 @@ spec:
       repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.30.3
 
-#    additionalVolumeMounts:
-#      - name: usb
-#        mountPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2410736-if00
-#
-#    additionalVolumes:
-#      - name: usb
-#        hostPath:
-#          path: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2410736-if00
-
     securityContext:
       # -- (bool) Privileged securityContext may be required if USB controller is accessed directly through the host machine
       privileged: true
@@ -115,8 +106,6 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-#          nginx.ingress.kubernetes.io/whitelist-source-range: |
-#            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
           nginx.ingress.kubernetes.io/auth-method: GET
           nginx.ingress.kubernetes.io/auth-url: http://authelia.security.svc.cluster.local/api/verify
           nginx.ingress.kubernetes.io/auth-signin: "https://auth.${CLOUDED_DOMAIN}?rm=$request_method"
@@ -172,21 +161,24 @@ spec:
         memory: 100Mi
       limits:
         memory: 500Mi
-#    sidecars:
-#      exporter:
-#        image: ghcr.io/kpetremann/mqtt-exporter:1.1.0
-#        imagePullPolicy: IfNotPresent
-#        env:
-#          - { name: LOG_LEVEL, value: DEBUG }
-#          - { name: LOG_MQTT_MESSAGE, value: "True" }
-#          - { name: MQTT_ADDRESS, value: "192.168.1.205" }
-#          - { name: MQTT_TOPIC, value: "zigbee2mqtt/#" }
-#          - { name: MQTT_V5_PROTOCOL, value: "True" }
-#          - { name: PROMETHEUS_PORT, value: "8080" }
-#          - { name: PROMETHEUS_PREFIX, value: zigbee2mqtt_ }
-#          - { name: ZIGBEE2MQTT_AVAILABILITY, value: "True" }
-#
-
+    sidecars:
+      exporter:
+        image: ghcr.io/kpetremann/mqtt-exporter:latest
+        imagePullPolicy: IfNotPresent
+        env:
+          - { name: LOG_LEVEL, value: DEBUG }
+          - { name: LOG_MQTT_MESSAGE, value: "True" }
+          - { name: MQTT_ADDRESS, value: "192.168.1.205" }
+          - { name: MQTT_TOPIC, value: "zigbee2mqtt/#" }
+          - { name: MQTT_V5_PROTOCOL, value: "True" }
+          - { name: PROMETHEUS_PORT, value: "8080" }
+          - { name: PROMETHEUS_PREFIX, value: "zigbee2mqtt_" }
+          - { name: ZIGBEE2MQTT_AVAILABILITY, value: "True" }
+          - { name: TOPIC_LABEL, value: "sensor" }
+          - { name: MQTT_EXPOSE_CLIENT_ID, value: "True" }
+        envFrom:
+          - secretRef:
+              name: zigbee2mqtt-secret
     nodeSelector:
       node-role.kubernetes.io/master: "true"
 #    affinity:

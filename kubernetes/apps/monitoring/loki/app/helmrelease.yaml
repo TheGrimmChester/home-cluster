@@ -98,7 +98,7 @@ spec:
           reporting_enabled: false
     gateway:
       enabled: true
-      replicas: 3
+      replicas: 2
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -125,7 +125,7 @@ spec:
           - hosts:
               - *host
     write:
-      replicas: 3
+      replicas: 2
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -139,7 +139,7 @@ spec:
         size: 10Gi
         storageClass: ceph-block
     read:
-      replicas: 3
+      replicas: 2
       affinity: |
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
