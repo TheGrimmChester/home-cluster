@@ -19,6 +19,15 @@ data:
             - host: redis-node-2.redis-headless.database.svc.cluster.local
               port: 26379
 
+    totp:
+      disable: false
+      issuer: authelia.com
+      algorithm: sha1
+      digits: 6
+      period: 30
+      skew: 1
+      secret_size: 32
+
     access_control:
       networks:
         - name: internal
@@ -53,7 +62,7 @@ data:
           # Applications with built-in auth
 
           # Applications without auth
-        - policy: one_factor
+        - policy: two_factor
           domain:
             - "teslamate-grafana.${CLOUDED_DOMAIN}"
             - "teslamate.${CLOUDED_DOMAIN}"
@@ -67,8 +76,21 @@ data:
 
     notifier:
       disable_startup_check: true
-      filesystem:
-        filename: /data/notification.txt
+      #filesystem:
+      #  filename: /data/notification.txt
+      smtp:
+        host: in-v3.mailjet.com
+        port: 587
+        timeout: 5s
+        username: "${MAILJET_API_KEY}"
+        password: "${MAILJET_API_SECRET}"
+        sender: "Authelia <authelia@${CLOUDED_DOMAIN}>"
+        identifier: localhost
+        subject: "[Authelia] {title}"
+        startup_check_address: test@authelia.com
+        disable_require_tls: false
+        disable_starttls: true
+        disable_html_emails: false
 
     identity_providers:
       oidc:
