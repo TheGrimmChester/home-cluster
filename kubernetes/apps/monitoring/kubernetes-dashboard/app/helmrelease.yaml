@@ -26,11 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: deployment
-      annotations:
-        reloader.stakater.com/auto: "true"
-      replicas: 2
     env:
       TZ: "${TIMEZONE}"
     extraArgs:
