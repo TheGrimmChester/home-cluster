@@ -40,7 +40,13 @@ spec:
 #        cert-manager.io/cluster-issuer: self-signed-issuer
         nginx.ingress.kubernetes.io/whitelist-source-range: |
           10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
-        hajimari.io/icon: mdi:kubernetes
+        hajimari.io/enable: "true"
+        hajimari.io/icon: logos:kubernetes
+        hajimari.io/info: Kubernetes dashboard
+        hajimari.io/group: admin
+        nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          auth_request_set $required_groups 'kubernetes_dashboard';
       hosts:
         - "kubernetes.${CLOUDED_DOMAIN}"
       tls:
