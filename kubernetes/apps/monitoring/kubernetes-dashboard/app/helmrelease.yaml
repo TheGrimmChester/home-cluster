@@ -26,6 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    controller:
+      replicas: 2
     env:
       TZ: "${TIMEZONE}"
     extraArgs:
