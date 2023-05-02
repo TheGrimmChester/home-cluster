@@ -9,7 +9,7 @@ resources:
   - emqx/ks.yaml
   - cyberchef/ks.yaml
   - teslamate/ks.yaml
-  - teslamate-grafana/ks.yaml
+#  - teslamate-grafana/ks.yaml
   - theme-park/ks.yaml
   - mealie/ks.yaml
   - grocy/ks.yaml
