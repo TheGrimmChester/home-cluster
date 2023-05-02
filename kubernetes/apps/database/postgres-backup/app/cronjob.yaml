@@ -28,7 +28,7 @@ spec:
                 - "/backup.sh"
               env:
                 - name: POSTGRES_HOST
-                  value: postgres-v15-ro.database.svc.cluster.local
+                  value: postgres-v15-rw.database.svc.cluster.local
                 - name: POSTGRES_USER
                   valueFrom:
                     secretKeyRef:
@@ -40,7 +40,7 @@ spec:
                       name: cloudnative-pg-secret
                       key: password
                 - name: POSTGRES_DB
-                  value: "home_assistant,teslamate,authelia,vaultwarden,grafana"
+                  value: "authelia,grafana,home_assistant,teslamate,vaultwarden"
               volumeMounts:
                 - name: nas-backups
                   mountPath: /backups
