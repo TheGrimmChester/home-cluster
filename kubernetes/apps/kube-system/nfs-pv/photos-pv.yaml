@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-photos-pv
+  namespace: default
+spec:
+  storageClassName: photos
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.101
+    path: "/mnt/Backup/Photos"
+  mountOptions:
+    - nfsvers=3
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-photos-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: photos
+  resources:
+    requests:
+      storage: 1Mi
