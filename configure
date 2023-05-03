@@ -84,6 +84,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/mealie-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/mealie/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/mealie/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/photoprism-family-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/default/photoprism/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/photoprism/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/plex-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/media/plex/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/plex/app/secret.sops.yaml"

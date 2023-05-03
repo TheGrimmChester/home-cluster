@@ -74,6 +74,12 @@ data:
             - "jd2.${CLOUDED_DOMAIN}"
             - "sickchill.${CLOUDED_DOMAIN}"
 
+          # Family access
+        - policy: one_factor
+          domain:
+            - "photos.${CLOUDED_DOMAIN}"
+          subject: 'group:family'
+
     notifier:
       disable_startup_check: true
       #filesystem:

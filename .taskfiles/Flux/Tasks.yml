@@ -36,7 +36,7 @@ tasks:
             'kubectl -n $0 annotate ReplicationSource/$1 reconcile.fluxcd.io/requestedAt="$(date +%s)" --overwrite'
 
   service-sync:
-    desc: Sync Flux VolSync
+    desc: Sync Flux Service
     cmds:
       - |
         kubectl get service --all-namespaces --no-headers | awk '{print $1, $2}' \

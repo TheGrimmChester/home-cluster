@@ -65,3 +65,8 @@ tasks:
           }'
     preconditions:
       - kubectl -n {{.namespace}} get pvc {{.claim}}
+
+  delete-failed-pods:
+    desc: Deletes failed pods
+    cmds:
+      - kubectl delete pods --field-selector status.phase=Failed -A --ignore-not-found=true
