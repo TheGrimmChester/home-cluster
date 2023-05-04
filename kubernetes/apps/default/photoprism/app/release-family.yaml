@@ -71,6 +71,11 @@ spec:
 
     service:
       main:
+        type: LoadBalancer
+        loadBalancerIP: "192.168.1.208"
+        annotations:
+          coredns.io/hostname: "photos.${CLOUDED_DOMAIN}"
+        externalTrafficPolicy: Local
         ports:
           http:
             port: 2342
@@ -93,6 +98,7 @@ spec:
           hajimari.io/icon: arcticons:photoprism
           hajimari.io/info: Manage Photos
           hajimari.io/group: media
+          hajimari.io/appName: Photos
         hosts:
           - host: photos.${CLOUDED_DOMAIN}
             paths:
