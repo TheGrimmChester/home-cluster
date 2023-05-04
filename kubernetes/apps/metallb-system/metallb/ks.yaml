@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-metallb
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/networking/metallb/app
+  path: ./kubernetes/apps/metallb-system/metallb/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -14,7 +14,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: metallb
-      namespace: networking
+      namespace: metallb-system
   interval: 30m
   retryInterval: 1m
   timeout: 10m
@@ -27,7 +27,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-metallb
-  path: ./kubernetes/apps/networking/metallb/config
+  path: ./kubernetes/apps/metallb-system/metallb/config
   prune: true
   sourceRef:
     kind: GitRepository
