@@ -9,6 +9,7 @@
     ":automergeDigest",
     ":automergeBranch",
     ":automergePr",
+    ":automergeRequireAllStatusChecks",
     "github>TheGrimmChester/home-cluster//.github/renovate/autoMerge.json5",
     "github>TheGrimmChester/home-cluster//.github/renovate/commitMessage.json5",
     "github>TheGrimmChester/home-cluster//.github/renovate/labels.json5",
@@ -22,6 +23,12 @@
   "schedule": ["every saturday"],
   "pre-commit": {
     "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "pr",
+    "platformAutomerge": true
   },
   "flux": {
     "fileMatch": ["kubernetes/.+\\.ya?ml$"]

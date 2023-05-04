@@ -5,10 +5,21 @@
       "description": "Auto merge GitHub Actions",
       "matchManagers": ["github-actions"],
       "automerge": true,
-      "automergeType": "pr",
+      "automergeType": "branch",
       "ignoreTests": false,
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "separateMinorPatch": true
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": ["lint", "prettier"],
+      "automerge": true
     }
+
   ]
 }
