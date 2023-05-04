@@ -8,7 +8,6 @@
       "automergeType": "pr",
       "ignoreTests": false,
       "matchUpdateTypes": ["minor", "patch", "digest"],
-      "matchDatasources": ["github-tags"],
       "separateMinorPatch": true
     }
   ]
