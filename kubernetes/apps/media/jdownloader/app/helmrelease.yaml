@@ -57,7 +57,7 @@ spec:
       CONTAINER_DEBUG: true
     envFrom:
       - secretRef:
-          name: jdownloader-jdownloader2
+          name: jdownloader-jdownloader2-secret
 
 #    resources:
 #      requests:
