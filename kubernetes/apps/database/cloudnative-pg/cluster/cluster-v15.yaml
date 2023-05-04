@@ -38,8 +38,8 @@ spec:
 #      - host all all 10.42.0.0/16 md5
 
 #  logLevel: debug
-#  monitoring:
-#    enablePodMonitor: true
+  monitoring:
+    enablePodMonitor: true
 #  resources:
 #    requests:
 #      memory: "512Mi"
