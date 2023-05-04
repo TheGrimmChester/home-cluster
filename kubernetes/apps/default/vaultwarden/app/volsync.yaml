@@ -6,7 +6,7 @@ metadata:
   name: vaultwarden
   namespace: default
 spec:
-  sourcePVC: vaultwarden-config-0
+  sourcePVC: vaultwarden-config
   trigger:
     schedule: "0 0 * * *"
   restic:
