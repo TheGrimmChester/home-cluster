@@ -5,7 +5,7 @@
       "description": "Auto merge GitHub Actions",
       "matchManagers": ["github-actions"],
       "automerge": true,
-      "automergeType": "pr",
+      "automergeType": "branch",
       "ignoreTests": false,
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "separateMinorPatch": true
