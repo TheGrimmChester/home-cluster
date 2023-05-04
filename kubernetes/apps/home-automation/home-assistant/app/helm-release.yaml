@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2023.4.1
+      tag: 2023.5.0
     initContainers:
       init-db:
         image: ghcr.io/onedr0p/postgres-initdb:14.7
