@@ -1,5 +1,5 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-system-upgrade-controller
@@ -11,11 +11,11 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   wait: true
-  interval: 30m
+  interval: 15m
   retryInterval: 1m
-  timeout: 10m
+  timeout: 30s
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-system-upgrade-controller-plans
@@ -29,6 +29,6 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   wait: true
-  interval: 30m
+  interval: 15m
   retryInterval: 1m
-  timeout: 10m
+  timeout: 30s
