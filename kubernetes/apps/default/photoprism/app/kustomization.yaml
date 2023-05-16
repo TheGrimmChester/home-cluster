@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - secret.sops.yaml
   - release-family.yaml
+  - release-self.yaml
   - volsync.yaml
