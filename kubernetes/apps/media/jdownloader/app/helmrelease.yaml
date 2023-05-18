@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: jdownloader2
-      version: 11.0.4
+      version: 11.0.5
       interval: 15m
       sourceRef:
         kind: HelmRepository
