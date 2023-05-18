@@ -24,6 +24,7 @@
   "pre-commit": {
     "enabled": true
   },
+  "digest": { "masterIssueApproval": true },
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
