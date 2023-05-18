@@ -7,7 +7,16 @@
       "automerge": true,
       "automergeType": "branch",
       "ignoreTests": false,
-      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Digest GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "automerge": false,
+      "automergeType": "branch",
+      "ignoreTests": false,
+      "matchUpdateTypes": ["digest"],
       "separateMinorPatch": true
     },
     {
@@ -20,6 +29,5 @@
       "matchPackagePatterns": ["lint", "prettier"],
       "automerge": true
     }
-
   ]
 }
