@@ -79,8 +79,8 @@ spec:
       ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
       ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
       ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
-      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/ttyACM0"
-      ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: "deconz"
+      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: "/dev/ttyUSB0"
+#      ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: "deconz"
 
     service:
       main:
@@ -146,9 +146,9 @@ spec:
       ttyacm:
         enabled: true
         type: hostPath
-        hostPath: "/dev/ttyACM0"
+        hostPath: "/dev/ttyUSB0"
 #        hostPath: "/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2410736-if00"
-        mountPath: "/dev/ttyACM0"
+        mountPath: "/dev/ttyUSB0"
 #
 #    volumes:
 #      - name: conbee
@@ -180,7 +180,7 @@ spec:
           - secretRef:
               name: zigbee2mqtt-secret
     nodeSelector:
-      node-role.kubernetes.io/master: "true"
+      kubernetes.io/hostname: "vm-1"
 #    affinity:
 #      podAffinity:
 #        requiredDuringSchedulingIgnoredDuringExecution:
