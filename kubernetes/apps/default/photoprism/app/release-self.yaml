@@ -65,14 +65,14 @@ spec:
 
       # PHOTOPRISM_SITE_AUTHOR: ""
       # # You may optionally set user, group and/or file permissions using environment variables:
-      UID: 568
-      GID: 568
+      UID: 1002
+      GID: 1002
       UMASK: 0000
       PHOTOPRISM_ORIGINALS_LIMIT: 4000 # in MB (default 1000)
     podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+      runAsUser: 1002
+      runAsGroup: 1002
+      fsGroup: 1002
       fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
