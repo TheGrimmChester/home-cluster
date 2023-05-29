@@ -12,3 +12,4 @@ kubeconfig
 # Ansible
 xanmanning.k3s*
 .idea/
+credentials-velero
