@@ -10,9 +10,9 @@ ingress:
   - hostname: "${CLOUDED_DOMAIN}"
     service: https://ingress-nginx-controller.networking.svc.cluster.local:443
     originRequest:
-      originServerName: "ipv4.${SECRET_DOMAIN}"
+      originServerName: "ingress.${SECRET_DOMAIN}"
   - hostname: "*.${CLOUDED_DOMAIN}"
     service: https://ingress-nginx-controller.networking.svc.cluster.local:443
     originRequest:
-      originServerName: "ipv4.${CLOUDED_DOMAIN}"
+      originServerName: "ingress.${CLOUDED_DOMAIN}"
   - service: http_status:404

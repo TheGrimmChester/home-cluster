@@ -62,7 +62,7 @@ spec:
         annotations:
           hajimari.io/appName: 'Vault'
           hajimari.io/icon: simple-icons:bitwarden
-          external-dns.alpha.kubernetes.io/target: "ipv4.${CLOUDED_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "ingress.${CLOUDED_DOMAIN}"
           external-dns/is-public: "true"
 
         hosts:
