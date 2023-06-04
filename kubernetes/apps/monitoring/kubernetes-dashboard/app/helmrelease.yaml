@@ -27,6 +27,7 @@ spec:
     keepHistory: false
   values:
     replicas: 2
+    replicaCount: 2
     env:
       TZ: "${TIMEZONE}"
     extraArgs:
