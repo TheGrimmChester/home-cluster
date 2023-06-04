@@ -57,6 +57,8 @@ spec:
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_ROOT_URL: "https://grafana.${CLOUDED_DOMAIN}"
+      GF_SERVER_SERVE_FROM_SUB_PATH: false
+
     envFromSecrets:
       - name: grafana-secret
     grafana.ini:
