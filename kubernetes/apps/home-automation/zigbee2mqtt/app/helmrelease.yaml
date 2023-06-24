@@ -172,11 +172,12 @@ spec:
           - { name: MQTT_ADDRESS, value: "192.168.1.205" }
           - { name: MQTT_TOPIC, value: "zigbee2mqtt/#" }
           - { name: MQTT_V5_PROTOCOL, value: "True" }
+          - { name: MQTT_CLIENT_ID, value: "zigbee2mqtt" }
           - { name: PROMETHEUS_PORT, value: "8080" }
           - { name: PROMETHEUS_PREFIX, value: "zigbee2mqtt_" }
           - { name: ZIGBEE2MQTT_AVAILABILITY, value: "True" }
           - { name: TOPIC_LABEL, value: "sensor" }
-          - { name: MQTT_EXPOSE_CLIENT_ID, value: "True" }
+          - { name: MQTT_EXPOSE_CLIENT_ID, value: "False" }
         envFrom:
           - secretRef:
               name: zigbee2mqtt-secret
