@@ -37,7 +37,7 @@ spec:
 #      - host all all 192.168.1.0/24 md5
 #      - host all all 10.42.0.0/16 md5
 
-#  logLevel: debug
+  logLevel: debug
   monitoring:
     enablePodMonitor: true
 #  resources:
