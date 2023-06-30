@@ -70,11 +70,8 @@ spec:
     retentionPolicy: 3d
     barmanObjectStore:
       wal:
-        compression: gzip
-      data:
-        compression: gzip
-        immediateCheckpoint: false
-        jobs: 2
+        compression: bzip2
+        maxParallel: 8
       destinationPath: s3://postgresql/backups/
       endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
       serverName: postgres-v15
