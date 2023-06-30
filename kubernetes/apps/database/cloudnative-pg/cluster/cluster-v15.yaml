@@ -120,3 +120,6 @@ spec:
 #    #   password:
 #    #     name: cloudnative-pg-secret
 #    #     key: password
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: false
