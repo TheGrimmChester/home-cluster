@@ -21,6 +21,10 @@ spec:
   storage:
     size: 20Gi
     storageClass: local-path
+  walStorage:
+    storageClass: local-path
+    size: 1Gi
+
   superuserSecret:
     name: cloudnative-pg-secret
   postgresql:
