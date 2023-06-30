@@ -67,7 +67,7 @@ spec:
         check_for_plugin_updates: false
       auth:
         signout_redirect_url: "https://auth.${CLOUDED_DOMAIN}/logout"
-        oauth_auto_login: false
+        oauth_auto_login: true
       auth.generic_oauth:
         enabled: true
         name: Authelia
