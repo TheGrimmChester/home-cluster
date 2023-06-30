@@ -19,7 +19,7 @@ spec:
       name: cloudnative-pg
       namespace: database
   interval: 30m
-  retryInterval: 1m
+  retryInterval: 10m
   timeout: 10m
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomization_v1beta2.json
@@ -39,5 +39,5 @@ spec:
     name: home-kubernetes
   wait: false # no flux ks dependents
   interval: 30m
-  retryInterval: 1m
-  timeout: 3m
+  retryInterval: 10m
+  timeout: 30m
