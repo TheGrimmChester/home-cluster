@@ -72,7 +72,7 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 8
-      destinationPath: s3://postgresql/backups/
+      destinationPath: s3://postgresql/
       endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
       serverName: postgres-v15
       s3Credentials:
@@ -111,7 +111,7 @@ spec:
         wal:
           compression: bzip2
           maxParallel: 8
-        destinationPath: s3://postgresql/cluster/
+        destinationPath: s3://postgresql/
         endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
         s3Credentials:
           accessKeyId:
