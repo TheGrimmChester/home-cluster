@@ -28,11 +28,11 @@ spec:
   superuserSecret:
     name: cloudnative-pg-secret
   postgresql:
-    parameters:
-      shared_buffers: 256MB
-      pg_stat_statements.max: '10000'
-      pg_stat_statements.track: all
-      auto_explain.log_min_duration: '10s'
+#    parameters:
+#      shared_buffers: 256MB
+#      pg_stat_statements.max: '10000'
+#      pg_stat_statements.track: all
+#      auto_explain.log_min_duration: '10s'
 
 #    parameters:
 #      max_connections: "300"
@@ -58,9 +58,9 @@ spec:
 #    limits:
 #      memory: "4Gi"
 #      cpu: "2"
-#  nodeMaintenanceWindow:
-#    inProgress: false
-#    reusePVC: false
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: false
 
 #  affinity:
 #    tolerations:
@@ -131,6 +131,3 @@ spec:
 #    #   password:
 #    #     name: cloudnative-pg-secret
 #    #     key: password
-  nodeMaintenanceWindow:
-    inProgress: false
-    reusePVC: false
