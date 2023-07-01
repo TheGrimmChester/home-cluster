@@ -11,19 +11,19 @@ spec:
   # using more than 1 replica: write amplification issues when leveraging replicated storage (e.g. ceph)
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:15.2
-  startDelay: 300
-  stopDelay: 300
-  replicationSlots:
-    highAvailability:
-      enabled: true
-    updateInterval: 300
+#  startDelay: 300
+#  stopDelay: 300
+#  replicationSlots:
+#    highAvailability:
+#      enabled: true
+#    updateInterval: 300
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
     storageClass: local-path
-  walStorage:
-    storageClass: local-path
-    size: 1Gi
+#  walStorage:
+#    storageClass: local-path
+#    size: 1Gi
 
   superuserSecret:
     name: cloudnative-pg-secret
