@@ -36,6 +36,7 @@ spec:
     replica:
       persistence:
         enabled: false
+      replicaCount: 2
     sentinel:
       enabled: true
       masterSet: redis-master
