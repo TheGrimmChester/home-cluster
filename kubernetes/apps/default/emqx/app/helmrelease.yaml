@@ -34,7 +34,7 @@ spec:
 
     image:
       repository: public.ecr.aws/emqx/emqx
-    replicaCount: 1
+    replicaCount: 2
     recreatePods: true
     envFrom:
       - secretRef:
