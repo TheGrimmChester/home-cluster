@@ -115,6 +115,13 @@ spec:
         size: 5Gi
         storageClass: ceph-block
 
+    persistence:
+      hass-dbus:
+        enabled: true
+        type: hostPath
+        hostPath: /run/dbus
+        mountPath: /run/dbus
+        readonly: true
 #      config:
 #        enabled: true
 #        type: emptyDir
