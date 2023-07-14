@@ -185,6 +185,15 @@ spec:
                 replacement: '$1'
                 target_label: cumulus_etage
 
+          - job_name: ecojoko-exporter
+            static_configs:
+              - targets: [ "192.168.1.98:3226" ]
+            scrape_interval: 10s
+            metric_relabel_configs:
+              - source_labels: [ecojoko]
+                regex: 'ecojoko(.*)'
+                replacement: '$1'
+                target_label: ecojoko
 
           # Example Prometheus scrape_configs entry (For version 2.26+
           - job_name: "hass"
