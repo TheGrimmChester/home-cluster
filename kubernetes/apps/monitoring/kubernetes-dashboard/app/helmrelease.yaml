@@ -26,6 +26,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    cert-manager:
+      enabled: false
+      installCRDs: false
+    nginx:
+      enabled: false
     replicas: 2
     replicaCount: 2
     env:
