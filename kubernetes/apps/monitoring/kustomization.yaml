@@ -11,4 +11,6 @@ resources:
   - ./grafana/ks.yaml
   - ./echo-server/ks.yaml
   - ./librespeed/ks.yaml
+  - ./apcupsd/ks.yaml
+  - ./apcupsd-exporter/ks.yaml
   - ./miscellaneous
