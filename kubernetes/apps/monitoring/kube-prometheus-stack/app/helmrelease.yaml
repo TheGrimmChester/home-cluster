@@ -166,6 +166,11 @@ spec:
                 #      - targets:
                 #          - '10.8.5.2:9153'
                 #
+
+          - job_name: apcupsd-exporter
+            static_configs:
+              - targets: [ "apcupsd.monitoring.svc.cluster.local:3551" ]
+
           - job_name: mqtt-exporter
             static_configs:
               - targets: [ "zigbee2mqtt.home-automation.svc.cluster.local:8080" ]
