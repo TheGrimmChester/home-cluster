@@ -97,3 +97,5 @@ spec:
         reloader.stakater.com/auto: "true"
 
     priorityClassName: "high-priority"
+    nodeSelector:
+      kubernetes.io/hostname: "vm-1"

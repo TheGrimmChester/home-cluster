@@ -54,3 +54,6 @@ spec:
     ingress:
       main:
         enabled: false
+
+    nodeSelector:
+      kubernetes.io/hostname: "vm-1"
