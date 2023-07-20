@@ -27,6 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+#    deploymentStrategy:
+#      type: Recreate
     extraInitContainers:
       - name: init-db
         image: ghcr.io/onedr0p/postgres-initdb:14.8
@@ -339,8 +341,8 @@ spec:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
       - vonage-status-panel
-      - panodata-map-panel
-      - natel-plotly-panel
+#      - panodata-map-panel
+#      - natel-plotly-panel
     serviceMonitor:
       enabled: true
     ingress:
@@ -362,11 +364,13 @@ spec:
       serviceMonitor:
         enabled: true
     persistence:
-      enabled: false
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: grafana
+      enabled: true
+      storageClassName: ceph-block
+
+#    topologySpreadConstraints:
+#      - maxSkew: 1
+#        topologyKey: kubernetes.io/hostname
+#        whenUnsatisfiable: DoNotSchedule
+#        labelSelector:
+#          matchLabels:
+#            app.kubernetes.io/name: grafana
