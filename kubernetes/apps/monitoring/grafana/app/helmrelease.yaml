@@ -53,7 +53,7 @@ spec:
       GF_LOG_FILTERS: rendering:debug
       GF_LOG_MODE: console
       GF_PANELS_DISABLE_SANITIZE_HTML: true
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel,natel-plotly-panel
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_ROOT_URL: "https://grafana.${CLOUDED_DOMAIN}/"
@@ -339,6 +339,8 @@ spec:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
       - vonage-status-panel
+      - panodata-map-panel
+      - natel-plotly-panel
     serviceMonitor:
       enabled: true
     ingress:
