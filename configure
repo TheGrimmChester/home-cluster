@@ -106,9 +106,6 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/authelia-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/security/authelia/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/security/authelia/app/secret.sops.yaml"
-        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/lldap-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/apps/security/lldap/app/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/security/lldap/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/loki-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/monitoring/loki/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/monitoring/loki/app/secret.sops.yaml"
