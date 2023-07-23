@@ -140,16 +140,16 @@ spec:
             spec:
               accessModes:
                 - ReadWriteOnce
-              storageClassName: ceph-block
+              storageClassName: local-path
               resources:
                 requests:
-                  storage: 50Gi
-        resources:
-#          requests:
-#            cpu: 350m
-#            memory: 1500M
-          limits:
-            memory: 4500M
+                  storage: 10Gi
+#        resources:
+##          requests:
+##            cpu: 350m
+##            memory: 1500M
+#          limits:
+#            memory: 4500M
         thanos:
           image: quay.io/thanos/thanos:v0.31.0@sha256:e7d337d6ac2aea3f0f9314ec9830291789e16e2b480b9d353be02d05ce7f2a7e
           # renovate: datasource=docker depName=quay.io/thanos/thanos
@@ -422,7 +422,7 @@ spec:
           - hosts:
               - *host
       alertmanagerSpec:
-        replicas: 2
+        replicas: 1
         storage:
           volumeClaimTemplate:
             spec:
@@ -430,3 +430,12 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+    affinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values: [ "vm-1", "vm-2" ]
+            topologyKey: kubernetes.io/hostname
