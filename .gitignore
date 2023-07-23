@@ -11,4 +11,8 @@ kubeconfig
 *.key
 # Ansible
 xanmanning.k3s*
-.idea
+# Terraform
+.terraform
+.terraform.tfstate*
+terraform.tfstate*
+.idea/

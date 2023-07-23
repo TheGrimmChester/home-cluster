@@ -7,7 +7,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-cert-manager-issuers
-    - name: cluster-apps-cloudflared
   path: ./kubernetes/apps/networking/ingress-nginx/certificates
   prune: true
   sourceRef:

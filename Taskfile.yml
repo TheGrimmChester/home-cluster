@@ -4,6 +4,7 @@ version: "3"
 vars:
   KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
   ANSIBLE_DIR: "{{.ROOT_DIR}}/ansible"
+  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
 
 dotenv: [".config.env"]
 
@@ -15,11 +16,13 @@ includes:
   ansible: .taskfiles/AnsibleTasks.yml
   cluster: .taskfiles/ClusterTasks.yml
   precommit: .taskfiles/PrecommitTasks.yml
+  terraform: .taskfiles/TerraformTasks.yml
   volsync: .taskfiles/VolSync/Tasks.yml
   flux: .taskfiles/Flux/Tasks.yml
   kubernetes: .taskfiles/Kubernetes/Tasks.yml
 
 tasks:
+
   init:
     desc: Initialize workstation dependencies with Brew
     cmds:
@@ -33,8 +36,6 @@ tasks:
       DEPS: >-
         age
         ansible
-        cilium-cli
-        cloudflare/cloudflare/cloudflared
         direnv
         fluxcd/tap/flux
         go-task/tap/go-task
@@ -47,6 +48,8 @@ tasks:
         prettier
         sops
         stern
+        terraform
+        tflint
         weaveworks/tap/gitops
         yamllint
         yq

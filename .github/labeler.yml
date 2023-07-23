@@ -5,5 +5,7 @@ area/github:
   - ".github/**/*"
 area/kubernetes:
   - "kubernetes/**/*"
+area/terraform:
+  - "terraform/**/*"
 area/templates:
   - "tmpl/**/*"
