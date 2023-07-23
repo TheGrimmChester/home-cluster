@@ -5,4 +5,4 @@ resources:
   # Namespace
   - namespace.yaml
   # Flux kustomizations
-#  - rook-ceph/ks.yaml
+  - rook-ceph/ks.yaml
