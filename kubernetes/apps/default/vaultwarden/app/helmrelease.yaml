@@ -5,6 +5,8 @@ metadata:
   name: vaultwarden
   namespace: vaultwarden
 spec:
+  dependsOn:
+    - name: cluster-apps-rook-ceph-cluster
   releaseName: vaultwarden
   interval: 5m
   chart:
