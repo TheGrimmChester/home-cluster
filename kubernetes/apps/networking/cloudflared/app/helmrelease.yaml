@@ -85,7 +85,7 @@ spec:
         type: configMap
         name: cloudflared-configmap
         subPath: config.yaml
-        mountPath: /etc/cloudflared/config/kubeconfig.yaml
+        mountPath: /etc/cloudflared/config/config.yaml
         readOnly: true
       creds:
         enabled: true
