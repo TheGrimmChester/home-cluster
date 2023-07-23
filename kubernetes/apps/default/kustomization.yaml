@@ -3,19 +3,19 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespace.yaml
-#  - hajimari/ks.yaml
-##  - kubernetes-schemas/ks.yaml
-##  - mosquitto/ks.yaml
-#  - emqx/ks.yaml
-##  - cyberchef/ks.yaml
-#  - teslamate/ks.yaml
-#  - tesla-dashcam/ks.yaml
-##  - teslamate-grafana/ks.yaml
-#  - theme-park/ks.yaml
-#  - mealie/ks.yaml
-#  - grocy/ks.yaml
-#  - abrp/ks.yaml
-##  - adguard-home/ks.yaml
-##  - snapdrop/ks.yaml
-#  - vaultwarden/ks.yaml
-#  - photoprism/ks.yaml
+  - hajimari/ks.yaml
+#  - kubernetes-schemas/ks.yaml
+#  - mosquitto/ks.yaml
+  - emqx/ks.yaml
+#  - cyberchef/ks.yaml
+  - teslamate/ks.yaml
+  - tesla-dashcam/ks.yaml
+#  - teslamate-grafana/ks.yaml
+  - theme-park/ks.yaml
+  - mealie/ks.yaml
+  - grocy/ks.yaml
+  - abrp/ks.yaml
+#  - adguard-home/ks.yaml
+#  - snapdrop/ks.yaml
+  - vaultwarden/ks.yaml
+  - photoprism/ks.yaml
