@@ -46,7 +46,7 @@ spec:
     cephClusterSpec:
       mon:
         count: 1
-        allowMultiplePerNode: true
+        allowMultiplePerNode: false
       # cephVersion:
       # image: quay.io/ceph/ceph:v17.2.0
       # network:
@@ -126,9 +126,12 @@ spec:
             devices:
 #              - name: "/dev/mapper/ubuntu--vg-rook--ceph"
               - name: "/dev/sdb"
-          - name: "truenas2012"
+          - name: "vm-2"
             devices:
-              - name: "/dev/disk/by-id/usb-Realtek_RTL9210_NVME_012345678904-0:0"
+              - name: "/dev/sdb"
+#          - name: "truenas2012"
+#            devices:
+#              - name: "/dev/disk/by-id/usb-Realtek_RTL9210_NVME_012345678904-0:0"
 
       dashboard:
         enabled: true
