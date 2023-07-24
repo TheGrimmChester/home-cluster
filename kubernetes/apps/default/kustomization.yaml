@@ -9,7 +9,7 @@ resources:
   - emqx/ks.yaml
 #  - cyberchef/ks.yaml
   - teslamate/ks.yaml
-  - tesla-dashcam/ks.yaml
+##  - tesla-dashcam/ks.yaml
 #  - teslamate-grafana/ks.yaml
   - theme-park/ks.yaml
   - mealie/ks.yaml
@@ -18,4 +18,4 @@ resources:
 #  - adguard-home/ks.yaml
 #  - snapdrop/ks.yaml
   - vaultwarden/ks.yaml
-  - photoprism/ks.yaml
+##  - photoprism/ks.yaml
