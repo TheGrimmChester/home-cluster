@@ -17,5 +17,5 @@ resources:
   - abrp/ks.yaml
 #  - adguard-home/ks.yaml
 #  - snapdrop/ks.yaml
-  - vaultwarden/ks.yaml
+#  - vaultwarden/ks.yaml
 ##  - photoprism/ks.yaml

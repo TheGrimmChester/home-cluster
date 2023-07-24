@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 #  - ./jellyfin/ks.yaml
-#  - ./plex/ks.yaml
-#  - ./tautulli/ks.yaml
-#  - ./sickchill/ks.yaml
-#  - ./jdownloader/ks.yaml
-#
+  - ./plex/ks.yaml
+  - ./tautulli/ks.yaml
+  - ./sickchill/ks.yaml
+  - ./jdownloader/ks.yaml
+
