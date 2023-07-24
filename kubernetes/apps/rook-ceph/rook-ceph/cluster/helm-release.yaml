@@ -116,12 +116,6 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-#          - name: "vm-3"
-#            devices:
-#              - name: "vdb"
-#          - name: "vm-2"
-#            devices:
-#              - name: "vda"
           - name: "vm-1"
             devices:
 #              - name: "/dev/mapper/ubuntu--vg-rook--ceph"
@@ -129,6 +123,7 @@ spec:
           - name: "vm-2"
             devices:
               - name: "/dev/sdb"
+
 #          - name: "truenas2012"
 #            devices:
 #              - name: "/dev/disk/by-id/usb-Realtek_RTL9210_NVME_012345678904-0:0"
