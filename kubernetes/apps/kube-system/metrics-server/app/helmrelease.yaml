@@ -35,3 +35,13 @@ spec:
       enabled: true
     serviceMonitor:
       enabled: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - vm-1
+                    - vm-2

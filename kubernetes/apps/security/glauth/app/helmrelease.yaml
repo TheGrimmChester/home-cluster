@@ -23,8 +23,18 @@ spec:
     remediation:
       retries: 5
   values:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - vm-1
+                    - vm-2
     controller:
-      replicas: 3
+      replicas: 2
       strategy: RollingUpdate
     image:
       repository: docker.io/glauth/glauth

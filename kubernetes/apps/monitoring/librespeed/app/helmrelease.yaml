@@ -71,3 +71,13 @@ spec:
           - hosts:
               - *host
             secretName: clouded-fr-production-tls
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - vm-1
+                    - vm-2

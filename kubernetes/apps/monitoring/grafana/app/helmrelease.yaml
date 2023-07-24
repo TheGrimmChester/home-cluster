@@ -366,6 +366,16 @@ spec:
     persistence:
       enabled: true
       storageClassName: ceph-block
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - vm-1
+                    - vm-2
 
 #    topologySpreadConstraints:
 #      - maxSkew: 1

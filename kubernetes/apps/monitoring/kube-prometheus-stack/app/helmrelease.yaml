@@ -430,12 +430,22 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+
     affinity:
-      podAffinity:
+      nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/name
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
                   operator: In
-                  values: [ "vm-1", "vm-2" ]
-            topologyKey: kubernetes.io/hostname
+                  values:
+                    - vm-1
+                    - vm-2
+#      podAffinity:
+#        requiredDuringSchedulingIgnoredDuringExecution:
+#          - labelSelector:
+#              matchExpressions:
+#                - key: app.kubernetes.io/name
+#                  operator: In
+#                  values: [ "vm-1", "vm-2" ]
+#            topologyKey: kubernetes.io/hostname

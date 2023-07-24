@@ -5,7 +5,7 @@ metadata:
   name: postgres-backup
   namespace: database
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 22 * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
