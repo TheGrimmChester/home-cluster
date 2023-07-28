@@ -31,3 +31,4 @@ resources:
   - ./csi-driver-nfs.yaml
   - ./pascaliske.yaml
   - ./kubereboot-charts.yaml
+  - ./influxdata-charts.yaml
