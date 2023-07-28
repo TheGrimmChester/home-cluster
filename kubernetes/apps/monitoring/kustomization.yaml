@@ -13,4 +13,5 @@ resources:
   - ./librespeed/ks.yaml
   - ./apcupsd/ks.yaml
   - ./apcupsd-exporter/ks.yaml
+  - ./influxdb/ks.yaml
   - ./miscellaneous
