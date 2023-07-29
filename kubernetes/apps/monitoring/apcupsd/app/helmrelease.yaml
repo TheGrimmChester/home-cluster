@@ -34,7 +34,7 @@ spec:
       strategy: RollingUpdate
     image:
       repository: bnhf/apcupsd
-      tag: latest@sha256:30f15aeeae3a836f17a09c2df83d944bde00a08f8296ac7318797a5a2c26289c
+      tag: latest@sha256:c183696ee99125f45f3a1f6ee1a96370ba1dbc00af3588bd12423b9af4cb0a47
     env:
       TZ: Europe/Paris
       UPSNAME: APC2018
