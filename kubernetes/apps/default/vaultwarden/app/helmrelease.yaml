@@ -3,10 +3,8 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: vaultwarden
-  namespace: vaultwarden
+  namespace: default
 spec:
-  dependsOn:
-    - name: cluster-apps-rook-ceph-cluster
   releaseName: vaultwarden
   interval: 5m
   chart:
