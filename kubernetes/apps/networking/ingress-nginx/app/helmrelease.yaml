@@ -38,6 +38,19 @@ spec:
                     - vm-2
 
     controller:
+      replicaCount: 2
+      minAvailable: 1
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
       extraEnvs:
         - name: TZ
           value: "${TIMEZONE}"
@@ -84,6 +97,19 @@ spec:
         limits:
           memory: 500Mi
     defaultBackend:
+      replicaCount: 2
+      minAvailable: 1
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
       enabled: true
       image:
         repository: ghcr.io/tarampampam/error-pages
