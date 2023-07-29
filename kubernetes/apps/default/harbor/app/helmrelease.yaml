@@ -1,0 +1,68 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app harbor
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: harbor
+      version: 5.1.3
+      sourceRef:
+        kind: HelmRepository
+        name: harbor-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 30
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 30
+  uninstall:
+    keepHistory: false
+  values:
+    ingress:
+      dashboard:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: 'harbor'
+          hajimari.io/icon: simple-icons:eclipsemosquitto
+          external-dns.alpha.kubernetes.io/target: "ingress.${CLOUDED_DOMAIN}"
+#          nginx.ingress.kubernetes.io/whitelist-source-range: |
+#            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        path: /
+        pathType: Prefix
+        hosts:
+          - &host "harbor.${CLOUDED_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+    metrics:
+      enabled: false
+    persistence:
+      enabled: true
+      storageClass: ceph-block
+      size: 50Gi
+    resources:
+      requests:
+        cpu: 10m
+        memory: 150Mi
+      limits:
+        memory: 512Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - vm-1
+                    - vm-2
