@@ -79,6 +79,17 @@ spec:
       enabled: true
       refresh: "10m"
     compactor:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
       enabled: true
       extraFlags:
         - "--compact.concurrency"
@@ -101,6 +112,17 @@ spec:
         storageClass: "ceph-block"
         size: 15Gi
     storegateway:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
       enabled: true
       resources:
         requests:

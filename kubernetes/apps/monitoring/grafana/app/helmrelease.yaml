@@ -357,6 +357,17 @@ spec:
         - hosts:
             - *host
     imageRenderer:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
       enabled: true
       replicas: 1
       networkPolicy:

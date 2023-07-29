@@ -37,6 +37,17 @@ spec:
       persistence:
         enabled: false
       replicaCount: 2
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
     sentinel:
       enabled: true
       masterSet: redis-master
