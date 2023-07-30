@@ -161,18 +161,18 @@ spec:
 
     nodeSelector:
 #      node-role.kubernetes.io/worker: "true"
-      intel.feature.node.kubernetes.io/gpu: "true"
+      #intel.feature.node.kubernetes.io/gpu: "true"
       kubernetes.io/hostname: "truenas2012"
 
-#    affinity:
-#      podAntiAffinity:
-#        requiredDuringSchedulingIgnoredDuringExecution:
-#          - labelSelector:
-#              matchExpressions:
-#                - key: app.kubernetes.io/name
-#                  operator: In
-#                  values: [ "truenas2012" ]
-#            topologyKey: kubernetes.io/hostname
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - truenas2012
 
 #    resources:
 #      requests:
