@@ -30,6 +30,19 @@ spec:
     keepHistory: false
   values:
     cleanPrometheusOperatorObjectNames: true
+    prometheusOperator:
+      enabled: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -39,6 +52,17 @@ spec:
             etcd:
               enabled: true
     kube-state-metrics:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - vm-1
+                      - vm-2
+
       metricLabelsAllowlist:
         - "pods=[*]"
         - "deployments=[*]"
