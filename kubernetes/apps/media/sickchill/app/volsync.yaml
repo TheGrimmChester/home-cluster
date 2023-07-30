@@ -20,6 +20,10 @@ spec:
       runAsUser: 0
       runAsGroup: 0
       fsGroup: 0
+    #https://volsync.readthedocs.io/en/stable/design/restic.html
     retain:
-      daily: 10
-      within: 3d
+      hourly: 24
+      daily: 30
+      weekly: 52
+      monthly: 12
+      yearly: 10

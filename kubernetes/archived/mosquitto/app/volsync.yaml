@@ -32,9 +32,10 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
+    #https://volsync.readthedocs.io/en/stable/design/restic.html
     retain:
-      hourly: 10
-      daily: 10
-      weekly: 10
-      monthly: 10
+      hourly: 24
+      daily: 30
+      weekly: 52
+      monthly: 12
       yearly: 10
