@@ -60,6 +60,7 @@ spec:
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_ROOT_URL: "https://grafana.${CLOUDED_DOMAIN}/"
       GF_SERVER_SERVE_FROM_SUB_PATH: false
+      GF_DASHBOARDS_MIN_REFRESH_INTERVAL: 10ms
 
     envFromSecrets:
       - name: grafana-secret
