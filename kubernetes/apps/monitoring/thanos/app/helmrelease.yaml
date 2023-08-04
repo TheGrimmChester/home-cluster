@@ -67,12 +67,12 @@ spec:
         extraTls:
           - hosts:
               - *host
-      resources:
-        requests:
-          cpu: 15m
-          memory: 64M
-        limits:
-          memory: 99M
+#      resources:
+#        requests:
+#          cpu: 15m
+#          memory: 64M
+#        limits:
+#          memory: 99M
     queryFrontend:
       enabled: true
     bucketweb:
@@ -124,12 +124,12 @@ spec:
                       - vm-2
 
       enabled: true
-      resources:
-        requests:
-          cpu: 23m
-          memory: 204M
-        limits:
-          memory: 226M
+#      resources:
+#        requests:
+#          cpu: 23m
+#          memory: 204M
+#        limits:
+#          memory: 226M
       persistence:
         enabled: true
         storageClass: "ceph-block"
