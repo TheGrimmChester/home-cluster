@@ -47,6 +47,19 @@ spec:
       mon:
         count: 2
         allowMultiplePerNode: false
+#      dataDirHostPath: /var/lib/rook
+      placement:
+        all:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                        - vm-1
+                        - vm-2
+
       # cephVersion:
       # image: quay.io/ceph/ceph:v17.2.0
       # network:

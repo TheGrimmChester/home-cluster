@@ -1,0 +1,94 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app myelectricaldata
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 30
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 30
+  uninstall:
+    keepHistory: false
+
+  values:
+    controller:
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+
+    maxHistory: 2
+    image:
+      repository: m4dm4rtig4n/myelectricaldata
+      tag: latest@sha256:38b176cc01f8e58efd49d0d6084e36b66208f436df99cd9f224293223b8ed85b
+    volumeMounts:
+      - name: data
+        mountPath: /data
+
+    env:
+      TZ: Europe/Paris
+    service:
+      main:
+        ports:
+          http:
+            port: 5000
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "ingress.${CLOUDED_DOMAIN}"
+          #          external-dns/is-public: "true"
+          nginx.ingress.kubernetes.io/whitelist-source-range: |
+            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "myelectricaldata"
+        hosts:
+          - host: &host "myelectricaldata.${CLOUDED_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+
+#    volumeClaimTemplates:
+#      - name: data
+#        mountPath: /data
+#        accessMode: ReadWriteOnce
+#        size: 1Gi
+#        storageClass: ceph-block
+    persistence:
+      data:
+        enabled: true
+        storageClass: "ceph-block"
+        accessMode: ReadWriteOnce
+        size: 1Gi
+
+    nodeSelector:
+      kubernetes.io/hostname: "vm-1"
