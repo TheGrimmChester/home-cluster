@@ -54,11 +54,18 @@ spec:
       enabled: true
       failureThreshold: 10
       periodSeconds: 10
-    persistence:
-      enabled: true
-      useExisting: true
-      name: influxdb-data
-      mountPath: /var/lib/influxdb2
+    volumeClaimTemplates:
+      - name: influxdb-data
+        mountPath: /var/lib/influxdb2
+        accessMode: ReadWriteMany
+        size: 50i
+        storageClass: ceph-block
+#
+#    persistence:
+#      enabled: true
+#      useExisting: true
+#      name: influxdb-data
+#      mountPath: /var/lib/influxdb2
     ## Create default user through docker entrypoint
     ## Defaults indicated below
     ##
