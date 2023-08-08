@@ -46,7 +46,18 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/whitelist-source-range: |
           10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
-        nginx.ingress.kubernetes.io/proxy-body-size: 4G
+#        nginx.ingress.kubernetes.io/proxy-body-size: 4G
+        nginx.ingress.kubernetes.io/auth-snippet: |
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Docker-Distribution-Api-Version registry/2.0;
+#        ingress.kubernetes.io/ssl-redirect: "false"
+#        nginx.ingress.kubernetes.io/enable-cors: "true"
+#        nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+
         hajimari.io/enable: "false"
       hosts:
         - "registry.${CLOUDED_DOMAIN}"
