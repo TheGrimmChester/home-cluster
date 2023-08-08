@@ -20,3 +20,4 @@ resources:
 #  - snapdrop/ks.yaml
   - vaultwarden/ks.yaml
 ##  - photoprism/ks.yaml
+  - registry/ks.yaml

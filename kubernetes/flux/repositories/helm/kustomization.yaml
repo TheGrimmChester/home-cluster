@@ -32,3 +32,4 @@ resources:
   - ./pascaliske.yaml
   - ./kubereboot-charts.yaml
   - ./influxdata-charts.yaml
+  - ./twuni.yaml
