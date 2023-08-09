@@ -21,3 +21,4 @@ resources:
   - vaultwarden/ks.yaml
 ##  - photoprism/ks.yaml
   - registry/ks.yaml
+  - registry-ui/ks.yaml
