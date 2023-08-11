@@ -34,7 +34,7 @@ spec:
       tag: 2.2.5
     env:
       PORT: 8080
-      REGISTRY_HOST: registry.${CLOUDED_DOMAIN}
+      REGISTRY_HOST: registry.videolan.org
       REGISTRY_PORT: 443
       SSL_VERIFY: false
       REGISTRY_ALLOW_DELETE: true
