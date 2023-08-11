@@ -34,7 +34,7 @@ spec:
       tag: main
     env:
       TELNET_PASSWORD: "test"
-      VOLUME_LEVEL_PERCENT: 10
+      VOLUME_LEVEL_PERCENT: 100
       SOUND_CARD_NUMBER: 1
     service:
       main:
