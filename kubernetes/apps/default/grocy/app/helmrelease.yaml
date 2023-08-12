@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: lscr.io/linuxserver/grocy
-      tag: 4.0.1@sha256:1182904995d84d4c5b04bc9e184fabd9ae29e03b66bc22676441fabccd47be04
+      tag: 4.0.0
     env:
       TZ: Europe/Paris
     #      PUID: 568
