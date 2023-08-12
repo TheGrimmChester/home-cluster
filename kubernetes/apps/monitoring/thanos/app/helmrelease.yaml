@@ -75,10 +75,13 @@ spec:
 #          memory: 99M
     queryFrontend:
       enabled: true
+      replicaCount: 2
     bucketweb:
       enabled: true
       refresh: "10m"
+      replicaCount: 2
     compactor:
+      replicaCount: 2
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -112,6 +115,7 @@ spec:
         storageClass: "ceph-block"
         size: 15Gi
     storegateway:
+      replicaCount: 2
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
