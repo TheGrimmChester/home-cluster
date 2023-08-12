@@ -30,8 +30,8 @@ spec:
       replicas: 1
       strategy: RollingUpdate
     image:
-      repository: ghcr.io/denidoman/vlc-telnet-telnet-docker
-      tag: main
+      repository: "registry.${CLOUDED_DOMAIN}/vlc-telnet-docker"
+      tag: "20230812"
     env:
       TELNET_PASSWORD: "test"
       VOLUME_LEVEL_PERCENT: 100
@@ -84,4 +84,4 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - vm-1
+                    - vm-2
