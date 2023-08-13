@@ -33,3 +33,4 @@ resources:
   - ./kubereboot-charts.yaml
   - ./influxdata-charts.yaml
   - ./twuni.yaml
+  - ./vmware-tanzu-charts.yaml
