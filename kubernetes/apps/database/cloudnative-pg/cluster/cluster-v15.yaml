@@ -84,7 +84,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
+      endpointURL: "https://s3.${CLOUDED_DOMAIN}/"
       serverName: postgres-v15
       s3Credentials:
         accessKeyId:
@@ -123,7 +123,7 @@ spec:
           compression: bzip2
           maxParallel: 8
         destinationPath: s3://postgresql/
-        endpointURL: "https://nas.${SECRET_DOMAIN}:9009/"
+        endpointURL: "https://s3.${CLOUDED_DOMAIN}/"
         s3Credentials:
           accessKeyId:
             name: cloudnative-pg-secret
