@@ -4,10 +4,8 @@ kind: DNSEndpoint
 metadata:
   name: cloudflared
   namespace: networking
-  annotations:
-    external-dns.alpha.kubernetes.io/target: "ingress.clouded.fr"
 spec:
   endpoints:
-    - dnsName: "ingress.clouded.fr"
+    - dnsName: "external.${CLOUDED_DOMAIN}"
       recordType: CNAME
-      targets: ["03aa6e7f-4ad3-4e1e-8aac-7327755e8238.cfargotunnel.com"]
+      targets: ["${BOOTSTRAP_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"]
