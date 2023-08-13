@@ -1,10 +1,9 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: minio
-  namespace: kube-system
+  namespace: default
 spec:
   interval: 30m
   chart:
@@ -31,7 +30,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: quay.io/minio/minio
-      tag: RELEASE.2023-01-25T00-19-54Z
+      tag: RELEASE.2023-08-09T23-30-22Z
     env:
       TZ: Europe/Paris
       MINIO_UPDATE: "off"
@@ -84,6 +83,8 @@ spec:
       main:
         enabled: true
         ingressClassName: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
         hosts:
           - host: &console-host "{{ .Release.Name }}.${CLOUDED_DOMAIN}"
             paths:
@@ -98,6 +99,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
           external-dns.alpha.kubernetes.io/target: "ingress.${CLOUDED_DOMAIN}"
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
           nginx.ingress.kubernetes.io/proxy-body-size: 1024m

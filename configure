@@ -130,8 +130,8 @@ main() {
             > "${PROJECT_DIR}/kubernetes/apps/media/tautulli/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/media/tautulli/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/minio-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/apps/kube-system/minio/app/secret.sops.yaml"
-        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/kube-system/minio/app/secret.sops.yaml"
+            > "${PROJECT_DIR}/kubernetes/apps/default/minio/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/minio/app/secret.sops.yaml"
 
         # generate ansible settings
         # generate ansible hosts file and secrets
