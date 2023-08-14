@@ -15,6 +15,16 @@ spec:
         kind: HelmRepository
         name: vmware-tanzu-charts
         namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 30
+  uninstall:
+    keepHistory: false
   values:
     image:
       repository: velero/velero
@@ -32,8 +42,19 @@ spec:
             s3ForcePathStyle: true
             s3Url: http://minio.default.svc.cluster.local:9000
             publicUrl: https://s3.${CLOUDED_DOMAIN}
+      volumeSnapshotLocation:
+        - name: default
+          bucket: restic
+          provider: aws
+          default: true
+          config:
+            region: us-east-1
+            s3ForcePathStyle: true
+            s3Url: http://minio.default.svc.cluster.local:9000
+            publicUrl: https://s3.${CLOUDED_DOMAIN}
 
       resticTimeout: 4h
+      defaultVolumesToFsBackup: true
 
     initContainers:
       - name: velero-plugin-for-aws
@@ -48,6 +69,10 @@ spec:
       existingSecret: velero-secret
 
     schedules:
+      hourly-backup:
+        schedule: "0 * * * *"
+        template:
+          ttl: "168h"
       daily-backup:
         schedule: "0 20 * * *"
         template:
@@ -58,7 +83,7 @@ spec:
       serviceMonitor:
         enabled: true
     backupsEnabled: true
-    snapshotsEnabled: false
+    snapshotsEnabled: true
     upgradeCRDs: false
     cleanUpCRDs: false
 
