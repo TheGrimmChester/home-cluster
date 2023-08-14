@@ -1,0 +1,23 @@
+---
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: backup-persistent-database
+  namespace: velero
+spec:
+  includedNamespaces:
+    - database
+  ttl: 720h0m0s
+---
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: backup-persistent-database-schedule
+  namespace: velero
+spec:
+  schedule: '0 * * * *'
+  template:
+    includedNamespaces:
+      - database
+    DefaultVolumesToFsBackup: true
+    ttl: 1h0m0s
