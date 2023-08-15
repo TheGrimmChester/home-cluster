@@ -37,27 +37,29 @@ spec:
 
     image:
       repository: lscr.io/linuxserver/sickchill
-      tag: latest
+      tag: latest@sha256:ffe5844c415b64cdab3eac9c43439bd5a512aac33d573f920614da24be96a3fe
       imagePullPolicy: IfNotPresent
     env:
-      TZ: Europe/Paris
-    resources:
-      requests:
-        cpu: 15m
-        memory: 64M
-      limits:
-        memory: 124M
+      TZ: "Europe/Paris"
+      PUID: 911
+      PGID: 1001
+#    resources:
+#      requests:
+#        cpu: 15m
+#        memory: 64M
+#      limits:
+#        memory: 124M
     service:
       main:
         ports:
           http:
             port: &port 8081
 
-    podSecurityContext:
-      runAsUser: 0
-      runAsGroup: 0
-      fsGroup: 0
-      fsGroupChangePolicy: OnRootMismatch
+#    podSecurityContext:
+#      runAsUser: 911
+#      runAsGroup: 1001
+#      fsGroup: 1001
+#      fsGroupChangePolicy: OnRootMismatch
 
     volumeClaimTemplates:
       - name: config
@@ -121,17 +123,9 @@ spec:
               - *host
             secretName: clouded-fr-production-tls
     probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /
-            port: *port
-          initialDelaySeconds: 30
-          periodSeconds: 60
-          timeoutSeconds: 10
-          failureThreshold: 3
-      readiness: *probes
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
       startup:
         enabled: false
