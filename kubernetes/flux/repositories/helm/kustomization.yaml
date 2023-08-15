@@ -34,3 +34,4 @@ resources:
   - ./influxdata-charts.yaml
   - ./twuni.yaml
   - ./vmware-tanzu-charts.yaml
+  - ./kyverno.yaml

@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./remove-cpu-limits.yaml
+  - ./add-safe-to-evict.yaml
+#  - ./apply-ingress-whitelist-annotations.yaml
+#  - ./apply-ingress-external-dns-annotations.yaml
+#  - ./apply-ingress-auth-annotations.yaml
