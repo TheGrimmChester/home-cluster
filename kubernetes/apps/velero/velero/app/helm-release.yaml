@@ -30,6 +30,7 @@ spec:
       repository: velero/velero
       tag: v1.11.1
     configuration:
+      snapshotVolumes: true
       extraEnvVars:
         TZ: "Europe/Paris"
       backupStorageLocation:
@@ -54,7 +55,8 @@ spec:
             publicUrl: https://s3.${CLOUDED_DOMAIN}
 
       resticTimeout: 4h
-#      defaultVolumesToFsBackup: true
+      defaultVolumesToFsBackup: true
+      includeClusterResources: true
 
     initContainers:
       - name: velero-plugin-for-aws
