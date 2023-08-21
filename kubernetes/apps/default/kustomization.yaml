@@ -7,7 +7,7 @@ resources:
 #  - kubernetes-schemas/ks.yaml
 #  - mosquitto/ks.yaml
   - emqx/ks.yaml
-#  - cyberchef/ks.yaml
+  - cyberchef/ks.yaml
   - teslamate/ks.yaml
 ##  - tesla-dashcam/ks.yaml
 #  - teslamate-grafana/ks.yaml
