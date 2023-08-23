@@ -15,4 +15,5 @@ resources:
   - ./apcupsd-exporter/ks.yaml
   - ./influxdb/ks.yaml
   - ./myelectricaldata/ks.yaml
+  - ./scrutiny/ks.yaml
   - ./miscellaneous

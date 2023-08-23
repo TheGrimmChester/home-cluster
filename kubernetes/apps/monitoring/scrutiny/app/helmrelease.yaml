@@ -1,0 +1,105 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app scrutiny
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: scrutiny2
+      version: 7.0.0
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remonitoringtion:
+      retries: 30
+  upgrade:
+    cleanupOnFail: true
+    remonitoringtion:
+      retries: 30
+  uninstall:
+    keepHistory: false
+
+  values:
+    image:
+      repository: tccr.io/truecharts/scrutiny-2
+      pullPolicy: IfNotPresent
+      tag: 0.7.1
+
+    env:
+      TZ: Europe/Paris
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+#          nginx.ingress.kubernetes.io/whitelist-source-range: |
+#            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          nginx.ingress.kubernetes.io/auth-method: GET
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.security.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${CLOUDED_DOMAIN}?rm=$request_method"
+          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+          nginx.ingress.kubernetes.io/auth-snippet: |
+            proxy_set_header X-Forwarded-Method $request_method;
+
+          hajimari.io/icon: mdi:download-box
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "JD2"
+        hosts:
+          - host: &host "scrutiny.${CLOUDED_DOMAIN}"
+            paths:
+              - path: /truenas/
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    securityContext:
+      readOnlyRootFilesystem: false
+      runAsNonRoot: false
+
+    podSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+
+    persistence:
+      varrun:
+        enabled: true
+      config:
+        enabled: true
+        mountPath: "/opt/scrutiny/config"
+      influxdb:
+        enabled: false
+        mountPath: "/opt/scrutiny/influxdb"
+      udev:
+        enabled: true
+        type: hostPath
+        hostPath: "/run/udev"
+        mountPath: "/run/udev"
+        readOnly: true
+
+    nodeSelector:
+#      node-role.kubernetes.io/worker: "true"
+      #intel.feature.node.kubernetes.io/gpu: "true"
+      kubernetes.io/hostname: "truenas2012"
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - truenas2012
