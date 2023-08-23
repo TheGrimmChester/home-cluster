@@ -35,6 +35,8 @@ data:
             - '10.0.0.0/8'
             - '172.16.0.0/12'
             - '192.168.0.0/18'
+            - '185.39.140.119'
+            - '2a03:d604:200:8700:b656:8ec0:85fe:9f80'
       default_policy: deny
       rules:
         # Disable Authelia for local network
