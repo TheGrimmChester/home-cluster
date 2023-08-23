@@ -9,8 +9,8 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: scrutiny2
-      version: 7.0.0
+      chart: scrutiny
+      version: 6.0.24
       interval: 15m
       sourceRef:
         kind: HelmRepository
@@ -19,23 +19,16 @@ spec:
   maxHistory: 3
   install:
     createNamespace: true
-    remonitoringtion:
-      retries: 30
   upgrade:
     cleanupOnFail: true
-    remonitoringtion:
-      retries: 30
   uninstall:
     keepHistory: false
 
   values:
-    image:
-      repository: tccr.io/truecharts/scrutiny-2
-      pullPolicy: IfNotPresent
-      tag: 0.7.1
-
-    env:
-      TZ: Europe/Paris
+#    image:
+#      repository: tccr.io/truecharts/scrutiny
+#      pullPolicy: IfNotPresent
+#      tag: 0.7.1@sha256:26c8258c6963367ff609fd080af1b84be53792831122ce019fa071cca72ad1a8
 
     ingress:
       main:
@@ -53,25 +46,15 @@ spec:
 
           hajimari.io/icon: mdi:download-box
           hajimari.io/enable: "true"
-          hajimari.io/appName: "JD2"
+          hajimari.io/appName: "Scrutiny"
         hosts:
-          - host: &host "scrutiny.${CLOUDED_DOMAIN}"
+          - host: &host "scrutiny-tn.${CLOUDED_DOMAIN}"
             paths:
-              - path: /truenas/
+              - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
-
-    securityContext:
-      readOnlyRootFilesystem: false
-      runAsNonRoot: false
-
-    podSecurityContext:
-      runAsUser: 0
-      runAsGroup: 0
-      fsGroup: 568
-      fsGroupChangePolicy: OnRootMismatch
 
     persistence:
       varrun:
