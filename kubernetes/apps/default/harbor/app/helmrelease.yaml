@@ -1,82 +1,77 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.trux.dev/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app harbor
+  name: harbor
   namespace: default
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://helm.goharbor.io
       chart: harbor
-      version: 16.7.4
+      version: 1.12.4
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: harbor
         namespace: flux-system
-  maxHistory: 3
-  install:
-    createNamespace: true
-    remediation:
-      retries: 30
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 30
-  uninstall:
-    keepHistory: false
   values:
-    externalURL: "harbor.${CLOUDED_DOMAIN}"
-    adminPassword: "testPAssword0"
-
-#    postgresql:
-#      enabled: true
-#
-#    externalDatabase:
-#      host: localhost
-#      port: 5432
-#      user: bn_harbor
-#      password: ""
-#      sslmode: disable
-#      coreDatabase: "harbor_registry"
-#      notaryServerDatabase: "harbor_notaryserver"
-#      notaryServerUsername: ""
-#      notaryServerPassword: ""
-#      notarySignerDatabase: "harbor_notarysigner"
-#      notarySignerUsername: ""
-#      notarySignerPassword: ""
-
-
-    ingress:
-      core:
-        enabled: true
-        hostname: &host "harbor.${CLOUDED_DOMAIN}"
-        ingressClassName: "nginx"
-        tls: true
-        extraTls:
-          - hosts:
-              - *host
-
-    metrics:
+    expose:
+      type: ingress
+      tls:
+        # The ingress controller has a default certificate so we don't need to configure it
+        certSource: none
+      # Default Values
+      ClusterIP:
+        name: harbor
+        ports:
+          httpPort: 80
+          httpsPort: 443
+      ingress:
+        hosts:
+          core: harbor.${CLOUDED_DOMAIN}
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "480"
+          nginx.ingress.kubernetes.io/custom-http-errors: "418"
+    externalURL: https://harbor.${CLOUDED_DOMAIN}
+#    secretKey: "${HARBOR_SECRET_KEY}"
+#    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
+    notary:
       enabled: false
     persistence:
       enabled: true
-      storageClass: ceph-block
-      size: 5Gi
-#    resources:
-#      requests:
-#        cpu: 10m
-#        memory: 150Mi
-#      limits:
-#        memory: 512Mi
-#    affinity:
-#      nodeAffinity:
-#        requiredDuringSchedulingIgnoredDuringExecution:
-#          nodeSelectorTerms:
-#            - matchExpressions:
-#                - key: kubernetes.io/hostname
-#                  operator: In
-#                  values:
-#                    - vm-1
-#                    - vm-2
+      resourcePolicy: "keep"
+      persistentVolumeClaim:
+        registry:
+          storageClass: ceph-block
+          size: 50Gi
+        chartmuseum:
+          storageClass: ceph-block
+          size: 5Gi
+        jobservice:
+          jobLog:
+            storageClass: ceph-block
+            size: 5Gi
+          scanDataExports:
+            storageClass: ceph-block
+            size: 5Gi
+        redis:
+          storageClass: ceph-block
+          size: 5Gi
+        trivy:
+          storageClass: ceph-block
+          size: 5Gi
+    redis:
+      type: internal
+    #    database:
+    #      type: internal
+    #      internal:
+    #        password: "${HARBOR_POSTGRES_PASSWORD}"
+    database:
+      type: external
+      external:
+        host: "postgres-v15-rw.database.svc.cluster.local"
+        port: "5432"
+        existingSecret: "harbor-secret"
+        coreDatabase: "harbor-registry"

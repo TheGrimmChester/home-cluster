@@ -78,6 +78,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/grocy-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/grocy/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/grocy/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/harbor-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/default/harbor/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/harbor/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/abrp-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/abrp/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/abrp/app/secret.sops.yaml"
