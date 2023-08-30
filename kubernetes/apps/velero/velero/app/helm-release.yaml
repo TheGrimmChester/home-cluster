@@ -71,11 +71,11 @@ spec:
       existingSecret: velero-secret
 
     schedules:
-      daily-backup:
-        # At 6:00am in the morning every day
-        schedule: "0 6 * * *"
-        template:
-          ttl: "168h"
+#      daily-backup:
+#        # At 6:00am in the morning every day
+#        schedule: "0 6 * * *"
+#        template:
+#          ttl: "168h"
       weekly-backup:
         # At the end of the week on a Sunday morning, at 6:00am
         schedule: "0 6 * * 0"
