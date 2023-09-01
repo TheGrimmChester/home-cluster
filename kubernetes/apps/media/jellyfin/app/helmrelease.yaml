@@ -95,7 +95,7 @@ spec:
       config:
         enabled: true
         type: hostPath
-        hostPath: "/mnt/Apps/volumes/jellyfin"
+        hostPath: "/mnt/Apps/kube/volumes/jellyfin"
         mountPath: "/config"
       media:
         enabled: true

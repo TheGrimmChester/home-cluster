@@ -115,7 +115,7 @@ spec:
       config:
         enabled: true
         type: hostPath
-        hostPath: "/mnt/Apps/volumes/plex"
+        hostPath: "/mnt/Apps/kube/volumes/plex"
         mountPath: "/config"
       media:
         enabled: true
