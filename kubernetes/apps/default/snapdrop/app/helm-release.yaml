@@ -1,60 +1,57 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.haraldkoch.ca/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: snapdrop
+  name: &app snapsdrop
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
-      chart: snapdrop
-      version: '1.0.4'
-      reconcileStrategy: ChartVersion
+      chart: app-template
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
-        name: pascaliske
+        name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
-    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
     image:
-      repository: ghcr.io/linuxserver/snapdrop
-      tag: latest
-
+      repository: linuxserver/snapdrop
+      tag: latest@sha256:1d748120bbae42b13cb935176ac56fc81b6dd7a924c6c50fbe0dd42a15d447e4
     service:
       main:
         ports:
           http:
             port: 80
-            targetPort: 3000
-
     ingress:
       main:
         enabled: true
         ingressClassName: nginx
         annotations:
-          hajimari.io/icon: mdi:shareall
-          hajimari.io/enable: "true"
+          external-dns.home.arpa/enabled: "true"
         hosts:
-          - host: &host "share.${CLOUDED_DOMAIN}"
+          - host: &host share.${CLOUDED_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
-
-    env:
-      - name: PGID
-        value: 568
-      - name: PUID
-        value: 568
-
-    resources:
-      limits:
-        cpu: 100m
-        memory: 128Mi
-      requests:
-        cpu: 100m
-        memory: 128Mi
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
