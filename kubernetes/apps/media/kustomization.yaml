@@ -8,4 +8,5 @@ resources:
   - ./tautulli/ks.yaml
   - ./sickchill/ks.yaml
   - ./jdownloader/ks.yaml
+  - ./navidrome/ks.yaml
   - ./vlc-telnet/ks.yaml
