@@ -27,8 +27,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
-#    deploymentStrategy:
-#      type: Recreate
+    deploymentStrategy:
+      type: Recreate
     extraInitContainers:
       - name: init-db
         image: ghcr.io/onedr0p/postgres-initdb:14.8
@@ -97,6 +97,29 @@ spec:
         org_name: HomeOps
         org_id: 1
         org_role: Viewer
+      date_formats:
+        use_browser_locale: true
+      explore:
+        enabled: true
+      grafana_net:
+        url: https://grafana.net
+      log:
+        mode: console
+      news:
+        news_feed_enabled: false
+      panels:
+        disable_sanitize_html: true
+      paths:
+        data: /var/lib/grafana/data
+        logs: /var/log/grafana
+        plugins: /var/lib/grafana/plugins
+        provisioning: /etc/grafana/provisioning
+      security:
+        allow_embedding: true
+        cookie_samesite: grafana
+      server:
+        root_url: "https://grafana.${CLOUDED_DOMAIN}/"
+
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
@@ -343,6 +366,7 @@ spec:
       datasources:
         enabled: true
         searchNamespace: ALL
+      logLevel: INFO
     plugins:
       - grafana-clock-panel
       - grafana-piechart-panel
