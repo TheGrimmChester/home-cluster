@@ -1,0 +1,98 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: scrypted
+  namespace: home-automation
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controller:
+      type: statefulset
+
+    image:
+      repository: ghcr.io/koush/scrypted
+      tag: 18-jammy-full-v0.41.0
+
+    service:
+      main:
+        ports:
+          http:
+            port: 11080
+          rebroadcast:
+            port: 34135
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+        nginx.ingress.kubernetes.io/whitelist-source-range: |
+          10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+        hosts:
+          - host: &host "{{ .Release.Name }}.${CLOUDED_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *host
+
+    nodeSelector:
+      intel.feature.node.kubernetes.io/gpu: "true"
+      kubernetes.io/hostname: "truenas2012"
+
+    persistence:
+      cache:
+        enabled: true
+        mountPath: /.cache
+        type: emptyDir
+      cache-npm:
+        enabled: true
+        mountPath: /.npm
+        type: emptyDir
+      dev-bus-usb:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/bus/usb
+        hostPathType: Directory
+        mountPath: /dev/bus/usb
+      sys-bus-usb:
+        enabled: true
+        type: hostPath
+        hostPath: /sys/bus/usb
+        hostPathType: Directory
+        mountPath: /sys/bus/usb
+      recs:
+        enabled: true
+        type: hostPath
+        hostPath: "/mnt/Services/camera/scrypted"
+        mountPath: "/recs"
+
+    resources:
+      requests:
+        gpu.intel.com/i915: 1
+        cpu: 136m
+        memory: 1024Mi
+      limits:
+        gpu.intel.com/i915: 1
+        memory: 8192Mi
+
+    securityContext:
+      privileged: true
+
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /server/volume
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        storageClass: ceph-block
