@@ -66,6 +66,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/zigbee2mqtt-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/home-automation/zigbee2mqtt/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/home-automation/zigbee2mqtt/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/frigate-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/default/frigate/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/frigate/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/teslamate-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"

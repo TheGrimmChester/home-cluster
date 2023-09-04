@@ -25,3 +25,4 @@ resources:
   - changedetection/ks.yaml
   - minio/ks.yaml
   - excalidraw/ks.yaml
+  - frigate/ks.yaml
