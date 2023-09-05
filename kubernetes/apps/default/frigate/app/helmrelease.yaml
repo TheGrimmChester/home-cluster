@@ -35,6 +35,8 @@ spec:
 
     env:
       TZ: "Europe/Paris"
+      LIBVA_DRIVER_NAME: i965
+
     envFrom:
       - secretRef:
           name: frigate-secret
@@ -90,6 +92,7 @@ spec:
         accessMode: ReadWriteOnce
         size: 10Gi
         storageClass: ceph-block
+    #https://github.com/Diaoul/home-ops/blob/main/cluster/apps/home-automation/frigate/helmrelease.yaml
 
     persistence:
       config-file:
@@ -104,7 +107,7 @@ spec:
         enabled: true
         type: hostPath
         hostPath: "/mnt/Services/camera/frigate"
-        mountPath: "/recs"
+        mountPath: "/media/frigate/recordings"
 
       cache:
         enabled: true
