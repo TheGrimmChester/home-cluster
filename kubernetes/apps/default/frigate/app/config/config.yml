@@ -44,7 +44,14 @@ record:
       mode: active_objects
 
 objects:
-  track: ["person", "pet", "car"]
+  track:
+    - person
+    - dog
+    - car
+    - door
+    - bird
+    - cat
+
   filters:
     person:
       min_area: 5000
@@ -89,7 +96,10 @@ cameras:
         coordinates: 35,339,209,188,172,32,0,102
       parking:
         coordinates: 571,221,585,45,492,26,261,152
-
+    motion:
+      mask:
+          - 154,0,0,46,0,0
+          - 520,0,524,24,571,22,575,0
   back:
     ffmpeg:
       inputs:
@@ -110,3 +120,6 @@ cameras:
           max_area: 100000
           threshold: 0.75
           min_score: 0.60
+        car:
+          mask:
+            - 0,360,640,360,640,0,0,0
