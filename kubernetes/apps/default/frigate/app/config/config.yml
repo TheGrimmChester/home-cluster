@@ -33,6 +33,10 @@ snapshots:
   retain:
     default: 2
 
+birdseye:
+  enabled: True
+  mode: continuous
+
 record:
   enabled: true
   retain:
