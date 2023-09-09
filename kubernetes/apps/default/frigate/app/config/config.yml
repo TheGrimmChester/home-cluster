@@ -4,8 +4,8 @@ logger:
 mqtt:
   host: "192.168.1.205"
   topic_prefix: frigate
-  user: "Xorix"
-  password: "inpOboY8en!"
+  user: "{FRIGATE_MQTT_USER}"
+  password: "{FRIGATE_MQTT_PASSWORD}"
 
 database:
   path: /data/frigate.db
@@ -33,6 +33,10 @@ snapshots:
   retain:
     default: 2
 
+birdseye:
+  enabled: True
+  mode: continuous
+
 record:
   enabled: true
   retain:
@@ -44,7 +48,14 @@ record:
       mode: active_objects
 
 objects:
-  track: ["person", "pet", "car"]
+  track:
+    - person
+    - dog
+    - car
+    - door
+    - bird
+    - cat
+
   filters:
     person:
       min_area: 5000
@@ -53,10 +64,10 @@ objects:
 
 go2rtc:
   streams:
-    frigate_front_hq: rtsp://admin:mojo911@192.168.1.70:554/h265Preview_01_main
-    frigate_front_lq: rtsp://admin:mojo911@192.168.1.70:554/h264Preview_01_sub
-    frigate_back_hq: rtsp://admin:mojo911@192.168.1.65:554/h265Preview_01_main
-    frigate_back_lq: rtsp://admin:mojo911@192.168.1.65:554/h264Preview_01_sub
+    frigate_front_hq: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.1.70:554/h265Preview_01_main
+    frigate_front_lq: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.1.70:554/h264Preview_01_sub
+    frigate_back_hq: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.1.65:554/h265Preview_01_main
+    frigate_back_lq: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@192.168.1.65:554/h264Preview_01_sub
 
 cameras:
   # --
@@ -89,7 +100,10 @@ cameras:
         coordinates: 35,339,209,188,172,32,0,102
       parking:
         coordinates: 571,221,585,45,492,26,261,152
-
+    motion:
+      mask:
+          - 154,0,0,46,0,0
+          - 520,0,524,24,571,22,575,0
   back:
     ffmpeg:
       inputs:
@@ -110,3 +124,6 @@ cameras:
           max_area: 100000
           threshold: 0.75
           min_score: 0.60
+        car:
+          mask:
+            - 0,360,640,360,640,0,0,0
