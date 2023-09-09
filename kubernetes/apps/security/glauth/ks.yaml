@@ -8,8 +8,6 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: 'true'
 spec:
-  dependsOn:
-
   path: './kubernetes/apps/security/glauth/app/'
   prune: true
   sourceRef:
