@@ -174,5 +174,5 @@ spec:
         volumeMounts:
           - name: config
             mountPath: /config
-    nodeSelector:
-      kubernetes.io/hostname: "vm-3"
+#    nodeSelector:
+#      kubernetes.io/hostname: "vm-3"
