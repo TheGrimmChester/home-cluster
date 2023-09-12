@@ -87,6 +87,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/abrp-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/abrp/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/abrp/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/abrp-secret-model-y.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/default/abrp/app-model-y/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/abrp/app-model-y/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/epic-free-games-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/other/epic-free-games/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/other/epic-free-games/app/secret.sops.yaml"
