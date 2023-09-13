@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: linuxserver/snapdrop
-      tag: latest@sha256:1d748120bbae42b13cb935176ac56fc81b6dd7a924c6c50fbe0dd42a15d447e4
+      tag: latest@sha256:7db2a4e2d5e983ed0d8b91155d8c9f552b34cd7ea7a6199930f23ab82ebb3525
     service:
       main:
         ports:
