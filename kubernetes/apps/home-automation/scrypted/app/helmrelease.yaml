@@ -48,6 +48,7 @@ spec:
               - *host
 
     nodeSelector:
+      google.feature.node.kubernetes.io/coral: "true"
       intel.feature.node.kubernetes.io/gpu: "true"
       kubernetes.io/hostname: "truenas2012"
 
