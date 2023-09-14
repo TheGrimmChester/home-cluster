@@ -45,7 +45,7 @@ spec:
 
     cephClusterSpec:
       mon:
-        count: 2
+        count: 4
         allowMultiplePerNode: false
 #      dataDirHostPath: /var/lib/rook
       placement:
@@ -59,6 +59,8 @@ spec:
                       values:
                         - vm-1
                         - vm-2
+                        - vm-3
+                        - truenas2012
 
       # cephVersion:
       # image: quay.io/ceph/ceph:v17.2.0
