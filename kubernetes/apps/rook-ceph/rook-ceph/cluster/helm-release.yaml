@@ -158,7 +158,7 @@ spec:
 #      network:
 #        provider: host
       network:
-        hostNetwork: true
+#        hostNetwork: true
     ingress:
       dashboard:
         ingressClassName: nginx
@@ -171,6 +171,22 @@ spec:
         host:
           name: &host "rook.${CLOUDED_DOMAIN}"
           path: /
+#          backend:
+#            service:
+#              name: rook-ceph-mgr-dashboard
+#              port:
+#                number: 7000
+          rules:
+            - host: "rook.${CLOUDED_DOMAIN}"
+              http:
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                      service:
+                        name: rook-ceph-mgr-dashboard
+                        port:
+                          number: 7000
         tls:
           - hosts:
               - *host
