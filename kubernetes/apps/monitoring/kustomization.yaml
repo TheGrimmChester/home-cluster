@@ -17,3 +17,4 @@ resources:
   - ./myelectricaldata/ks.yaml
   - ./scrutiny/ks.yaml
   - ./miscellaneous
+  - ./ecojoko-exporter/ks.yaml

@@ -69,6 +69,9 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/frigate-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/frigate/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/frigate/app/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/kubernetes/ecojoko-secret.sops.yaml" \
+            > "${PROJECT_DIR}/kubernetes/apps/monitoring/ecojoko-exporter/app/secret.sops.yaml"
+        sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/monitoring/ecojoko-exporter/app/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/teslamate-secret.sops.yaml" \
             > "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/default/teslamate/app/secret.sops.yaml"
