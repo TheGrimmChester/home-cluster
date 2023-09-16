@@ -110,7 +110,7 @@ if __name__ == '__main__':
     print("Running on...")
     print("Port: " + str(server_port) + "\n")
 
-    if broker is not None
+    if broker is not None:
         client = connect_mqtt()
 
     start_http_server(server_port)
@@ -124,7 +124,7 @@ if __name__ == '__main__':
                 ecojoko_injection = 0
 
             value.set(ecojoko_injection)
-            if broker is not None
+            if broker is not None:
                 client.publish(topic, ecojoko_injection)
 
             time.sleep(10)
