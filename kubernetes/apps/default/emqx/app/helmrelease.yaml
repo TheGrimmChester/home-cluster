@@ -27,9 +27,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    controller:
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+
     image:
-      repository: emqx/emqx
-    replicaCount: 3
+      repository: public.ecr.aws/emqx/emqx
+    replicaCount: 2
     recreatePods: true
     envFrom:
       - secretRef:
@@ -101,4 +106,3 @@ spec:
                   values:
                     - vm-1
                     - vm-2
-                    - vm-3
