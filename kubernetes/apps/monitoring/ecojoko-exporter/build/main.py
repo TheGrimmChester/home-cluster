@@ -86,8 +86,8 @@ def login_and_save_cookie(email, password):
         return None
 
 
-value = Gauge('general_power_consumption', 'General Power Consuption')
-error_count = Counter('general_power_consumption_failures', 'Failures')
+value = Gauge('ecojoko_injection', 'Ecojoko Injection')
+error_count = Counter('ecojoko_injection_failures', 'Failures')
 
 cookies = login_and_save_cookie(username, password)
 
