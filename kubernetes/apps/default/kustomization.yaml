@@ -17,7 +17,7 @@ resources:
   - abrp/ks.yaml
 #  - harbor/ks.yaml
 #  - adguard-home/ks.yaml
-  - snapdrop/ks.yaml
+#  - snapdrop/ks.yaml
   - vaultwarden/ks.yaml
 ##  - photoprism/ks.yaml
   - registry/ks.yaml
