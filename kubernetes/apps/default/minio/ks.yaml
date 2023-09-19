@@ -6,6 +6,9 @@ metadata:
   name: cluster-apps-minio
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-ingress-nginx
+
   path: ./kubernetes/apps/default/minio/app
   prune: true
   sourceRef:
@@ -23,6 +26,8 @@ metadata:
   name: cluster-apps-minio-eu-east
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-ingress-nginx
   path: ./kubernetes/apps/default/minio/app-eu-east
   prune: true
   sourceRef:
