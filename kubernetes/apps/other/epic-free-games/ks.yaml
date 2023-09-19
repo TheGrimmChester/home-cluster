@@ -7,6 +7,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-ingress-nginx
   interval: 10m
   path: "./kubernetes/apps/other/epic-free-games/app"
   prune: true
