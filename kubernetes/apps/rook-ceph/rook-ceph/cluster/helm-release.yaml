@@ -45,7 +45,7 @@ spec:
 
     cephClusterSpec:
       mon:
-        count: 4
+        count: 3
         allowMultiplePerNode: false
 #      dataDirHostPath: /var/lib/rook
       placement:
