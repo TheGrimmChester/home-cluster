@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: metallb-system
 resources:
   - ./helmrelease.yaml
+  - ./ipconf.yaml
