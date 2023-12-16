@@ -9,7 +9,7 @@ globalDefault: false
 description: "This priority class should be used for XYZ service pods only."
 
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: teslamate

@@ -1,6 +1,6 @@
 #psql -h 192.168.1.202 -U postgres teslamate < teslamate.bck
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: teslamate-grafana
