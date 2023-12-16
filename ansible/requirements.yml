@@ -14,4 +14,4 @@ roles:
   - name: githubixx.cilium_cli
     version: 2.7.0+0.15.8
   - name: xanmanning.k3s
-    version: v3.4.2
+    version: v3.4.3
