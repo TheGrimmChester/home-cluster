@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: velero/velero
-      tag: v1.12.2
+      tag: v1.12.3
     configuration:
       snapshotVolumes: true
       extraEnvVars:
