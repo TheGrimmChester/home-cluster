@@ -22,7 +22,7 @@ spec:
       strategy: RollingUpdate
     image:
       repository: docker.io/mpepping/cyberchef
-      tag: v10.8.1
+      tag: v10.8.2
     env:
       TZ: ${TIMEZONE}
     resources:
